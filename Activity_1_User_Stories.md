@@ -8,11 +8,14 @@ As a player, I want the character to be able to run, jump and crouch.
 
 As a player, when the character faces non-player characters, I want it to stop and interact with them.
 
-As a player, I want the character to move to different levels if it passes this level. 
+Character attributes:
 
-As a game designer, I want character to move faster once it changes faster boots.
+As a game designer, I want the character to decide fight to enemies or not when it moves in front of them.
 
-As a game designer, I want player to be able to select previous levels the player passes.
+As a game designer, I want the character to open treasure boxes to increase health, attach ability or defence when it stands on them.
+
+As a game designer, I want character to move faster once it receives faster boots.
+
 
 Enemies: 
 
