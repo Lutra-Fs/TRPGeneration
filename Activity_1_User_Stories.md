@@ -55,3 +55,19 @@ Character attributes:
 As a player, I want to have some saving points when I playing the game.
 
 As a designer, I want the map and maze more uniform styles.
+
+Save/Loading a game:
+
+As a player, I want to be able to save and load my game so that I can continue playing at a later time.
+
+As a player, I want to be able to save the game automatically so that I don’t have to worry about losing my progress or re-doing the game.
+
+As a developer, I want to be able to save and load the game so that I can test the game without having to play through the entire game.
+
+As a player, I want to be able to manage my save files so that I can delete old save files.
+
+Map Design:
+
+As a designer, I want to be able to design a map using a structured format so that I can easily create a map.
+
+As a designer, I want a UI to create a map so that I can easily create a map.
