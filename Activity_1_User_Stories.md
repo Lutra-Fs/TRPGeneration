@@ -23,6 +23,8 @@ As a player, I want to see the enemy's armor level when facing an enemy.
 
 As a player, I want to know if I win or lost when I choose ATTACK enemy.
 
+As a designer, I want each enemy has different level.
+
 As a designer, I want character increase attack ability when player choose to attack enemy and win.
 
 As a designer, I want character decrease health level when player choose to attack enemy and lost.
