@@ -8,18 +8,16 @@ As a player, I want the character to be able to run, jump and crouch.
 
 As a player, when the character faces non-player characters, I want it to stop and interact with them.
 
-Character attributes:
+Map Interaction:
 
 As a game designer, I want the character to decide fight to enemies or not when it moves in front of them.
 
-As a game designer, I want the character to open treasure boxes to increase health, attach ability or defence when it stands on them.
+As a game designer, I want the character to open treasure boxes to increase health, attack ability or defence when it stands on them.
 
 As a game designer, I want character to move faster once it receives faster boots.
 
 
 Enemies: 
-
-As a player, I want to choose ATTACK or NOT ATTACK when facing an enemy.
 
 As a player, I want to see the enemy's armor level when facing an enemy.
 
