@@ -71,3 +71,26 @@ Map Design:
 As a designer, I want to be able to design a map using a structured format so that I can easily create a map.
 
 As a designer, I want a UI to create a map so that I can easily create a map.
+
+Inventory system:
+
+As a player, I want to be able to view my inventory via shortcut keys.
+
+As a player, I want the inventory to be organized and sorted automatically.
+
+As a player, I want to have thumbnails to show my inventory.
+
+As a player, I want to have a clean inventory interface.
+
+As a player, I want to be able to pick up/discard gear/supplies in the game.
+
+As a game designer, I want players' inventory to be tradeable.
+
+As a game designer, I want players to be able to perform in-game actions while opening the inventory interface.
+
+Merchant NPC system:
+
+As a player, I want to be able to buy and sell items from the merchant.
+
+As a player, I want to talk to the merchant NPC to get game clues.
+
