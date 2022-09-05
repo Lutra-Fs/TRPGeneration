@@ -38,23 +38,23 @@ As a designer, I want character has health level and attack ability attributes.
 As a player, I want to have a table to show character's health level and attack ability.
 
 
-Maze/Map/Level
+Maze/Map/Level:
 
-As a player, I want to choose the maze when I start the game.
+As a player, I want to choose the map when I start the game.
 
-As a player, I want to know what is the difficulty suits me when I choose the maze.
+As a player, I want to see treasure chest when I explore the map.
 
-As a player, I want to choose the game level when I choose the map.
+As a player, I want to know the different between levels.
 
-As a designer, I want to know what kind of difficylty I need to setup when I initialize the game.
+As a designer, I want to know how many levels I need to setup in a map when I initialize the game.
 
-As a designer, I want the map with beautiful scene.
+As a designer, I want to setup different styles in different maps when I initialize the game.
 
 Character attributes:
 
-As a player, I want to have some saving points when I playing the game.
+As a player, I want to know the suggestion level for my character before I enter the level.
 
-As a designer, I want the map and maze more uniform styles.
+As a player, I want to know the approximate time spending when I playing in different maps and levels.
 
 Save/Loading a game:
 
