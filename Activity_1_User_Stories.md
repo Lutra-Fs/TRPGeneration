@@ -50,7 +50,7 @@ As a designer, I want to know how many levels I need to setup in a map when I in
 
 As a designer, I want to setup different styles in different maps when I initialize the game.
 
-Character attributes:
+AI assistant analysing:
 
 As a player, I want to know the suggestion level for my character before I enter the level.
 
