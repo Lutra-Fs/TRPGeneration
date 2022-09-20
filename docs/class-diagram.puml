@@ -1,0 +1,141 @@
+@startuml
+
+class Game
+class Level
+class Player
+class NPC
+class Enemy
+class Fight
+class Trader
+class Trade
+class TalkNPC
+class SaveParser
+class FighterStat
+class Talk
+
+class Game{
+    Player player;
+    Level level;
+    void statusToUI(Status s);
+    void inputInterrupt();
+}
+
+Game *-- Player
+Game *-- Level
+
+class Player{
+    String name;
+    Location curLoc;
+    int money;
+    PlayerState p;
+    FighterStat fightStat;
+    Backpack b;
+    void save();
+    void interact();
+}
+
+Player *-- Location
+Player *-- PlayerState
+Player *-- FighterStat
+
+class Location{
+    int x;
+    int y;
+    static final int MAX_X;
+    static final int MAX_Y;
+}
+
+enum PlayerState{
+    NORMAL
+    FIGHTING
+    TRADING
+    TALKING
+    INTERACTING
+}
+class FighterStat {
+    int HP;
+    int MP;
+    int atk;
+    int def;
+    List<Skill> skills;
+    Skill getSkill(int index);
+    Skill getSkill_AI();
+}
+FighterStat *-- Skill
+class Skill {
+    int attack;
+    int chance;
+}
+class Level{
+    Map<Location,Boolean> coordinates;
+    final int curLevel;
+    Map<Location,boolean> canSave;
+    Map<Location,NPC> NPCs;
+    Set<Location> NPCLocation;
+}
+
+Level *-- NPC
+abstract class NPC{
+    Location loc;
+    String name;
+    void interact(Player player);
+}
+
+NPC <|-- Enemy
+NPC <|-- Trader
+NPC <|-- TalkNPC
+
+class Enemy{
+    int level;
+    FighterStat attr;
+}
+Enemy *-- FighterStat
+
+class SaveParser{
+    Game saveFoldertoStatus(String path);
+    void statustoSaveFolder(Game s,String path);
+}
+
+class Trader{
+    Backpack b;
+    int money; // useless?
+    Things trade(Things p);
+}
+
+Trader *-- Backpack
+Player *-- Backpack
+
+class Backpack{
+    List<Things> things;
+    Things trade(Things t);
+}
+Backpack *-- Things
+
+class Things{
+    // mainly food. if introduce new things, we can use extends
+    String name;
+    int price;
+    void use(Player player); // only player can use?
+}
+
+class TalkNPC{
+    TalkTree tree;
+}
+
+class Talk{
+    TalkNPC npc;
+    Player p;
+    Sentence curSentence;
+    bool curRound;
+}
+
+class TalkTree{
+    Sentence s;
+}
+
+class Sentence{
+    String content;
+    List<Sentence> next;
+}
+
+@enduml
