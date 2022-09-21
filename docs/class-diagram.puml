@@ -17,7 +17,7 @@ class Game{
     Player player;
     Level level;
     Interaction curInteraction;
-    void statusToUI(Status s);
+    void printToScreen();
     void inputInterrupt();
 }
 
@@ -34,6 +34,10 @@ class Player{
     Backpack b;
     void save();
     void interact();
+    void buy(Thing t);
+    void use(Thing t);
+    List<Thing> getBackpack();
+    void
 }
 
 Player *-- Location
@@ -53,21 +57,33 @@ enum PlayerState{
     TRADING
     TALKING
     INTERACTING
+    SAVING
 }
 class FighterStat {
     int HP;
     int MP;
     int atk;
     int def;
+    int fightLevel;
+    int exp;
+    int maxEXP;
     List<Skill> skills;
     Skill getSkill(int index);
     Skill getSkill_AI();
+    Skill calcSkillAtk(Skill s);
+    void level_up();
+    void beAttacked(Skill s);
+    boolean isDead();
 }
 FighterStat *-- Skill
 class Skill {
-    int attack;
-    int chance;
+    final String name;
+    int atk;
+    // int chance;
 }
+class Skill
+note left: atk belongs to FighterStat class is basic atk\n when attacking the calcSkillAtk should always be called to calculate the actual atk.
+
 class Level{
     Map<Location,Boolean> coordinates;
     final int curLevel;
@@ -99,27 +115,32 @@ class SaveParser{
     Game saveFoldertoStatus(String path);
     void statustoSaveFolder(Game s,String path);
 }
+Interaction <|-- SaveParser
 
 class Trader{
     Backpack b;
-    int money; // useless?
-    Things trade(Things p);
+    Thing sell(int index);
+    Thing sell(String name);
 }
 
 Trader *-- Backpack
 Player *-- Backpack
 
 class Backpack{
-    List<Things> things;
-    Things trade(Things t);
+    List<Thing> things;
+    Thing sell(int index);
+    Thing sell(String name);
+    List<Thing> getThings();
+    void add(Thing t);
+    void use(Thing t);
 }
-Backpack *-- Things
+Backpack *-- Thing
 
-class Things{
+class Thing{
     // mainly food. if introduce new things, we can use extends
     String name;
     int price;
-    void use(Player player); // only player can use?
+    void use(Player player);
 }
 
 class TalkNPC{
@@ -140,7 +161,8 @@ Interaction <|-- Talk
 class Talk{
     TalkNPC npc;
     Sentence curSentence;
-    bool curRound;
+    List<Sentence> getNextSentences();
+    void selectSentence(int index);
 }
 Talk *-- TalkNPC
 Talk *-- Sentence
@@ -154,20 +176,35 @@ class Sentence{
 }
 
 class Trade{
-    Trader trader;
-    Things curThings;
+    Trader npc;
+    List<Things> getNPCThings();
+    Things getNPCThing(int index);
+    Things getNPCThing(String name);
+    void trade(Thing t); // from npc to player
+    void trade(int index);
+    void trade(String name);
 }
 Trade *-- Trader
 
 class Fight{
-    Enemy enemy;
+    Enemy npc;
+    boolean isPlayerTurn;
     FighterStat playerStat;
     FighterStat enemyStat;
-    void attack();
-    void defend();
+    Fight(Player p, Enemy e);
+    void act();
+    List<Skill> getPlayerSkills();
+    List<Thing> getPlayerBackpack();
+    void useThings(Thing t);
+    void useThings(int index);
+    void useThings(String name);
+    void useSkill(Skill s);
+    void useSkill(int index);
+    void useSkill(String name);
     void useSkill();
-    void useItem();
-    void run();
+    void makeAttack(Skill s);
+    boolean isEnd();
+    void nextTurn();
 }
 Fight *-- Enemy
 @enduml
