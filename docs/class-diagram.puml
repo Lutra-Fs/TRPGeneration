@@ -16,12 +16,14 @@ class Talk
 class Game{
     Player player;
     Level level;
+    Interaction curInteraction;
     void statusToUI(Status s);
     void inputInterrupt();
 }
 
 Game *-- Player
 Game *-- Level
+Game *-- Interaction
 
 class Player{
     String name;
@@ -75,12 +77,14 @@ class Level{
 }
 
 Level *-- NPC
+Level *-- Location
+
 abstract class NPC{
     Location loc;
     String name;
     void interact(Player player);
 }
-
+NPC *-- Location
 NPC <|-- Enemy
 NPC <|-- Trader
 NPC <|-- TalkNPC
@@ -121,21 +125,49 @@ class Things{
 class TalkNPC{
     TalkTree tree;
 }
+TalkNPC *-- TalkTree
+
+abstract class Interaction {
+    Player player;
+    NPC npc;
+    void interact();
+    void interrupt();
+}
+Interaction <|-- Fight
+Interaction <|-- Trade
+Interaction <|-- Talk
 
 class Talk{
     TalkNPC npc;
-    Player p;
     Sentence curSentence;
     bool curRound;
 }
-
+Talk *-- TalkNPC
+Talk *-- Sentence
 class TalkTree{
     Sentence s;
 }
-
+TalkTree *-- Sentence
 class Sentence{
     String content;
     List<Sentence> next;
 }
 
+class Trade{
+    Trader trader;
+    Things curThings;
+}
+Trade *-- Trader
+
+class Fight{
+    Enemy enemy;
+    FighterStat playerStat;
+    FighterStat enemyStat;
+    void attack();
+    void defend();
+    void useSkill();
+    void useItem();
+    void run();
+}
+Fight *-- Enemy
 @enduml
