@@ -1,6 +1,6 @@
 package src.main;
 
-public abstract class interaction {
+public abstract class Interaction {
     Player player;
     NPC npc;
     abstract void interact();
