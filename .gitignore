@@ -41,3 +41,9 @@ replay_pid*
 # --- #
 
 # Add any other files you want to ignore below
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
