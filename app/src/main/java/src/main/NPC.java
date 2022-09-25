@@ -4,7 +4,7 @@ public abstract class NPC {
     Location loc;
     final String name;
 
-    public NPC(String name, int x, int y) {
+    protected NPC(String name, int x, int y) {
         this.name = name;
         loc = new Location(x, y);
     }
