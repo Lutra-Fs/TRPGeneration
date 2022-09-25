@@ -1,37 +1,31 @@
 package src.main;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Level {
     // boolean in coordinates: true = wall, false = empty
-    Map<Location, Boolean> coordinates;
+    int[][] coordinates;
     final int curLevel;
-    Set<Boolean> canSave;
+    Map<Location, Boolean> canSave;
     Map<Location, NPC> npcs;
     Set<Location> npcLocation;
 
     public Level(int curLevel) {
         this.curLevel = curLevel;
-        this.coordinates = new HashMap<>();
-        this.canSave = new HashSet<>();
+        this.coordinates = this.getCoordinates();
+        this.canSave = new HashMap<>();
         this.npcs = new HashMap<>();
         this.npcLocation = new HashSet<>();
     }
 
     // GETs
-    // get current level
     public int getCurLevel() {
         return this.curLevel;
     }
 
-    public Map<Location, Boolean> getCoordinates() {
-        return this.coordinates;
-    }
+    public int[][] getCoordinates() { return this.coordinates; }
 
-    public Set<Boolean> getCanSave() { return this.canSave; }
+    public Map<Location, Boolean> getCanSave() { return this.canSave; }
 
     public Map<Location, NPC> getNpcs() {
         return this.npcs;
@@ -50,13 +44,9 @@ public class Level {
         this.npcLocation = npcLocation;
     }
 
-    public void setCoordinates(Map<Location, Boolean> coordinates) {
-        this.coordinates = coordinates;
-    }
+    public void setCoordinates(int[][] coordinates) { this.coordinates = coordinates; }
 
-    public void setCanSave(Set<Boolean> canSave) {
-        this.canSave = canSave;
-    }
+    public void setCanSave(Map<Location, Boolean> canSave) { this.canSave = canSave; }
 
     // ADDs
     public void addNpc(Location location, NPC npc) {
@@ -67,13 +57,9 @@ public class Level {
         this.npcLocation.add(location);
     }
 
-    public void addCoordinate(Location location, Boolean isWall) {
-        this.coordinates.put(location, isWall);
-    }
+    public void addCoordinates(int x, int y, int value) { this.coordinates[x][y] = value; }
 
-    public void addCanSave(Boolean canSave) {
-        this.canSave.add(canSave);
-    }
+    public void addCanSave(Location location, Boolean canSave) { this.canSave.put(location, canSave); }
 
     // REMOVEs
     public void removeNpc(Location location) {
@@ -84,9 +70,7 @@ public class Level {
         this.npcLocation.remove(location);
     }
 
-    public void removeCoordinate(Location location) {
-        this.coordinates.remove(location);
-    }
+    public void removeCoordinates(int x, int y) { this.coordinates[x][y] = 0; }
 
     public void removeCanSave(Location location) {
         this.canSave.remove(location);
@@ -99,9 +83,4 @@ public class Level {
         this.npcs.put(newLocation, npc);
     }
 
-    public void moveCoordinate(Location oldLocation, Location newLocation) {
-        Boolean isWall = this.coordinates.get(oldLocation);
-        this.coordinates.remove(oldLocation);
-        this.coordinates.put(newLocation, isWall);
-    }
 }
