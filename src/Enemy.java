@@ -1,3 +1,5 @@
+package src;
+
 public class Enemy {
 
     private int level;

@@ -1,3 +1,5 @@
+package src;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid Skill");
+            throw new IOException("invalid src.Skill");
         }
     }
     public void useSkill(String name) throws IOException{
@@ -76,7 +78,7 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid Skill");
+            throw new IOException("invalid src.Skill");
         }
     }
     public void makeAttack(Skill s){

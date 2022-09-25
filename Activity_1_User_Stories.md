@@ -88,9 +88,9 @@ As a game designer, I want players' inventory to be tradeable.
 
 As a game designer, I want players to be able to perform in-game actions while opening the inventory interface.
 
-Merchant NPC system:
+Merchant src system:
 
 As a player, I want to be able to buy and sell items from the merchant.
 
-As a player, I want to talk to the merchant NPC to get game clues.
+As a player, I want to talk to the merchant src to get game clues.
 

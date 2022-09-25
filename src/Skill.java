@@ -1,3 +1,5 @@
+package src;
+
 public class Skill {
     int id;
     String name;
