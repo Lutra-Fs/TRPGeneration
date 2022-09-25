@@ -66,7 +66,7 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid src.Skill");
+            throw new IOException("invalid Skill");
         }
     }
     public void useSkill(String name) throws IOException{
@@ -78,7 +78,7 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid src.Skill");
+            throw new IOException("invalid Skill");
         }
     }
     public void makeAttack(Skill s){
