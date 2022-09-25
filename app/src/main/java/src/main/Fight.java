@@ -56,19 +56,18 @@ public class Fight extends Interaction {
     }
 
     @Override
-    void interrupt() throws GameException.PlayerDeadException{
+    void interrupt() throws GameException {
         player.p = Player.PlayerState.NORMAL;
         if(playerStat.isDead()){
             throw new GameException.PlayerDeadException();
         }else{
-            int exp = enemyStat.getFighterLevel() - playerStat.getFighterLevel();
-            //Add equation for exp calculation
+            int levelDifference = enemyStat.getFighterLevel() - playerStat.getFighterLevel();
+            double e = Math.E;
+            int exp = (int) Math.pow(e, levelDifference);
             playerStat.setExp(exp);
-            //levelUp
-            //Add money to player
+            playerStat.levelUp();
+            player.money += 5*levelDifference;
             player.fightState = playerStat;
         }
     }
-
-
 }
