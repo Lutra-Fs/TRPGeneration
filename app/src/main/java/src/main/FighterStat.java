@@ -11,14 +11,6 @@ public class FighterStat {
     final int eachLevelExp;
     List<Skill> skills;
 
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
     public FighterStat(int HP, int MP, int atk, int def, int fighterLevel, int exp, int eachLevelExp, List<Skill> skills) {
         this.HP = HP;
         this.MP = MP;
@@ -29,7 +21,12 @@ public class FighterStat {
         this.eachLevelExp = eachLevelExp;
         this.skills = skills;
     }
-
+    public List<Skill> getSkills() {
+        return skills;
+    }
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
     public int getHP() {
         return HP;
     }
@@ -45,6 +42,7 @@ public class FighterStat {
     public void setFighterLevel(int fighterLevel) {
         this.fighterLevel = fighterLevel;
     }
+
     public int getMP() {
         return MP;
     }
@@ -93,7 +91,9 @@ public class FighterStat {
     }
 
     public void levelUp() throws GameException {
-
+        if(getExp()<eachLevelExp){
+            throw new GameException();
+        }
     }
 
     public void beAttacked(Skill s) throws GameException {
