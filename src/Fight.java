@@ -1,6 +1,4 @@
 package src;
-
-import java.io.IOException;
 import java.util.List;
 
 public class Fight {
@@ -32,15 +30,15 @@ public class Fight {
         return null;
     }
 
-    public void useThings(Thing t) throws IOException {
+    public void useThings(Thing t) throws GameException {
 
     }
-    public void useThings(int index) throws IOException{
+    public void useThings(int index) throws GameException{
         if (things.get(index) == null){
-            throw new IOException("invalid Thing");
+            throw new GameException("invalid Thing");
         }
     }
-    public void useThings(String name) throws IOException{
+    public void useThings(String name) throws GameException{
         boolean check = false;
         for (Thing thing : things) {
             if (thing.getName().equals(name)) {
@@ -49,15 +47,15 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid Thing");
+            throw new GameException("invalid Thing");
         }
     }
 
-    public void useSkill(Skill s) throws IOException{
+    public void useSkill(Skill s) throws GameException{
 
     }
 
-    public void useSkill(int index) throws IOException{
+    public void useSkill(int index) throws GameException{
         boolean check = false;
         for (Skill skill : skills) {
             if (skill.getId() == index) {
@@ -66,10 +64,10 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid Skill");
+            throw new GameException("invalid Skill");
         }
     }
-    public void useSkill(String name) throws IOException{
+    public void useSkill(String name) throws GameException{
         boolean check = false;
         for (Skill skill : skills) {
             if (skill.getName().equals(name)) {
@@ -78,7 +76,7 @@ public class Fight {
             }
         }
         if(!check){
-            throw new IOException("invalid Skill");
+            throw new GameException("invalid Skill");
         }
     }
     public void makeAttack(Skill s){
