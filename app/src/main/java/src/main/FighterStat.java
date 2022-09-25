@@ -97,7 +97,9 @@ public class FighterStat {
     }
 
     public void beAttacked(Skill s) throws GameException {
-
+        if(calcSkillATK(s).getAtk()<getDef()){
+            throw new GameException();
+        }
     }
 
     public boolean isDead(){
