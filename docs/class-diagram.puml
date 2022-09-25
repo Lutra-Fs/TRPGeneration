@@ -1,22 +1,9 @@
 @startuml
 
-class Game
-class Level
-class Player
-class NPC
-class Enemy
-class Fight
-class Trader
-class Trade
-class TalkNPC
-class SaveParser
-class FighterStat
-class Talk
-
 class Game{
     Player player;
     Level level;
-    Interaction curInteraction;
+    {static} Interaction curInteraction;
     void printToScreen();
     void inputInterrupt();
 }
@@ -37,7 +24,7 @@ class Player{
     void buy(Thing t);
     void use(Thing t);
     List<Thing> getBackpack();
-    void
+
 }
 
 Player *-- Location
@@ -140,8 +127,11 @@ class Thing{
     // mainly food. if introduce new things, we can use extends
     String name;
     int price;
+    Buff buff;
     void use(Player player);
 }
+
+class Buff
 
 class TalkNPC{
     TalkTree tree;
@@ -154,6 +144,9 @@ abstract class Interaction {
     void interact();
     void interrupt();
 }
+
+note right: Maybe use singleton pattern to make sure only one instance of Interaction class is created.
+
 Interaction <|-- Fight
 Interaction <|-- Trade
 Interaction <|-- Talk
