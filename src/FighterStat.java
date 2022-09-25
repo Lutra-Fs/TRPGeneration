@@ -1,6 +1,4 @@
 package src;
-
-import java.io.IOException;
 import java.util.List;
 
 public class FighterStat {
@@ -94,16 +92,16 @@ public class FighterStat {
         return s;
     }
 
-    public void levelUp() throws IOException {
+    public void levelUp() throws GameException {
         int level = exp/ eachLevelExp;
         if(level<=1){
-            throw new IOException();
+            throw new GameException();
         }
     }
 
-    public void beAttacked(Skill s) throws IOException {
+    public void beAttacked(Skill s) throws GameException {
         if(calcSkillATK(s).getAtk() <= 0){
-            throw new IOException();
+            throw new GameException();;
         }
     }
 
