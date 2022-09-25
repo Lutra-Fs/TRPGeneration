@@ -1,0 +1,210 @@
+@startuml
+
+class Game
+class Level
+class Player
+class NPC
+class Enemy
+class Fight
+class Trader
+class Trade
+class TalkNPC
+class SaveParser
+class FighterStat
+class Talk
+
+class Game{
+    Player player;
+    Level level;
+    Interaction curInteraction;
+    void printToScreen();
+    void inputInterrupt();
+}
+
+Game *-- Player
+Game *-- Level
+Game *-- Interaction
+
+class Player{
+    String name;
+    Location curLoc;
+    int money;
+    PlayerState p;
+    FighterStat fightStat;
+    Backpack b;
+    void save();
+    void interact();
+    void buy(Thing t);
+    void use(Thing t);
+    List<Thing> getBackpack();
+    void
+}
+
+Player *-- Location
+Player *-- PlayerState
+Player *-- FighterStat
+
+class Location{
+    int x;
+    int y;
+    static final int MAX_X;
+    static final int MAX_Y;
+}
+
+enum PlayerState{
+    NORMAL
+    FIGHTING
+    TRADING
+    TALKING
+    INTERACTING
+    SAVING
+}
+class FighterStat {
+    int HP;
+    int MP;
+    int atk;
+    int def;
+    int fightLevel;
+    int exp;
+    int maxEXP;
+    List<Skill> skills;
+    Skill getSkill(int index);
+    Skill getSkill_AI();
+    Skill calcSkillAtk(Skill s);
+    void level_up();
+    void beAttacked(Skill s);
+    boolean isDead();
+}
+FighterStat *-- Skill
+class Skill {
+    final String name;
+    int atk;
+    // int chance;
+}
+class Skill
+note left: atk belongs to FighterStat class is basic atk\n when attacking the calcSkillAtk should always be called to calculate the actual atk.
+
+class Level{
+    Map<Location,Boolean> coordinates;
+    final int curLevel;
+    Map<Location,boolean> canSave;
+    Map<Location,NPC> NPCs;
+    Set<Location> NPCLocation;
+}
+
+Level *-- NPC
+Level *-- Location
+
+abstract class NPC{
+    Location loc;
+    String name;
+    void interact(Player player);
+}
+NPC *-- Location
+NPC <|-- Enemy
+NPC <|-- Trader
+NPC <|-- TalkNPC
+
+class Enemy{
+    int level;
+    FighterStat attr;
+}
+Enemy *-- FighterStat
+
+class SaveParser{
+    Game saveFoldertoStatus(String path);
+    void statustoSaveFolder(Game s,String path);
+}
+Interaction <|-- SaveParser
+
+class Trader{
+    Backpack b;
+    Thing sell(int index);
+    Thing sell(String name);
+}
+
+Trader *-- Backpack
+Player *-- Backpack
+
+class Backpack{
+    List<Thing> things;
+    Thing sell(int index);
+    Thing sell(String name);
+    List<Thing> getThings();
+    void add(Thing t);
+    void use(Thing t);
+}
+Backpack *-- Thing
+
+class Thing{
+    // mainly food. if introduce new things, we can use extends
+    String name;
+    int price;
+    void use(Player player);
+}
+
+class TalkNPC{
+    TalkTree tree;
+}
+TalkNPC *-- TalkTree
+
+abstract class Interaction {
+    Player player;
+    NPC npc;
+    void interact();
+    void interrupt();
+}
+Interaction <|-- Fight
+Interaction <|-- Trade
+Interaction <|-- Talk
+
+class Talk{
+    TalkNPC npc;
+    Sentence curSentence;
+    List<Sentence> getNextSentences();
+    void selectSentence(int index);
+}
+Talk *-- TalkNPC
+Talk *-- Sentence
+class TalkTree{
+    Sentence s;
+}
+TalkTree *-- Sentence
+class Sentence{
+    String content;
+    List<Sentence> next;
+}
+
+class Trade{
+    Trader npc;
+    List<Things> getNPCThings();
+    Things getNPCThing(int index);
+    Things getNPCThing(String name);
+    void trade(Thing t); // from npc to player
+    void trade(int index);
+    void trade(String name);
+}
+Trade *-- Trader
+
+class Fight{
+    Enemy npc;
+    boolean isPlayerTurn;
+    FighterStat playerStat;
+    FighterStat enemyStat;
+    Fight(Player p, Enemy e);
+    void act();
+    List<Skill> getPlayerSkills();
+    List<Thing> getPlayerBackpack();
+    void useThings(Thing t);
+    void useThings(int index);
+    void useThings(String name);
+    void useSkill(Skill s);
+    void useSkill(int index);
+    void useSkill(String name);
+    void useSkill();
+    void makeAttack(Skill s);
+    boolean isEnd();
+    void nextTurn();
+}
+Fight *-- Enemy
+@enduml
