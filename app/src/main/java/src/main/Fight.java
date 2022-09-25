@@ -24,7 +24,12 @@ public class Fight extends Interaction {
     }
 
     public void useThings(String name) throws GameException{
-
+        if (name.matches("\\d+")){
+            int index = Integer.parseInt(name);
+            if(index > getPlayerBackpack().size()){
+                throw new GameException();
+            }
+        }
     }
     public void useSkill() throws GameException{
         FighterStat s = isPlayerTurn? playerStat:enemyStat;
@@ -38,7 +43,12 @@ public class Fight extends Interaction {
     }
 
     public void useSkill(String name) throws GameException{
-
+        if (name.matches("\\d+")){
+            int index = Integer.parseInt(name);
+            if(index > getPlayerSkills().size()){
+                throw new GameException();
+            }
+        }
     }
 
     public boolean isEnd(){
