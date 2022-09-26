@@ -6,6 +6,8 @@ class Game{
     {static} Interaction curInteraction;
     void printToScreen();
     void inputInterrupt();
+    {static} Game saveFiletoStatus(Game g, String path);
+    {static} Game gameConfigFoldertoStatus(String path);
 }
 
 Game *-- Player
@@ -99,8 +101,7 @@ class Enemy{
 Enemy *-- FighterStat
 
 class SaveParser{
-    Game saveFoldertoStatus(String path);
-    void statustoSaveFolder(Game s,String path);
+    {static} void statustoSaveFolder(Game s,String path);
 }
 Interaction <|-- SaveParser
 
