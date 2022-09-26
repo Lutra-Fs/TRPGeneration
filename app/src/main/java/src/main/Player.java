@@ -7,7 +7,7 @@ public class Player {
     PlayerState p;
     Location curLoc;
     int money;
-    FighterState fightState;
+    FighterStat fightStat;
     Backpack b;
 
     enum PlayerState {
@@ -35,7 +35,7 @@ public class Player {
         }
     }
 
-    void use(Backpack.Thing t, FighterState f) throws GameException {
+    void use(Backpack.Thing t, FighterStat f) throws GameException {
         if (!b.things.remove(t)) {
             throw new GameException("No such thing");
         }

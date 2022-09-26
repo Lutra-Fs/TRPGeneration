@@ -36,7 +36,7 @@ public class Backpack {
         things.add(t);
     }
 
-    void use(Thing t, FighterState f) throws GameException {
+    void use(Thing t, FighterStat f) throws GameException {
         if (!things.remove(t)) {
             throw new GameException("No such thing");
         }
@@ -52,12 +52,27 @@ public class Backpack {
         return s.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Backpack)) {
+            return false;
+        }
+        Backpack backpack = (Backpack) o;
+        return things.equals(backpack.things);
+    }
+
+    @Override
+    public int hashCode() {
+        return things.hashCode();
+    }
+
     class Thing {
         final String name;
         final int price;
         final int recover;
 
-        void use(FighterState f) {
+        void use(FighterStat f) {
             f.addHP(recover);
         }
 
@@ -67,9 +82,23 @@ public class Backpack {
             this.recover = recover;
         }
 
+        public String getName() {
+            return name;
+        }
+
         @Override
         public String toString() {
             return name + ": price:" + price + " which can recover " + recover + " HP";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof Thing)) {
+                return false;
+            }
+            Thing thing = (Thing) o;
+            return name.equals(thing.name) && price == thing.price && recover == thing.recover;
         }
 
     }
