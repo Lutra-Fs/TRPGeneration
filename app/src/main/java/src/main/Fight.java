@@ -36,10 +36,6 @@ public class Fight extends Interaction {
         Skill sAi = s.calcSkillATK(s.getSkillAI());
         FighterStat e = isPlayerTurn? enemyStat:playerStat;
         e.beAttacked(sAi);
-        if (isEnd()) {
-
-        }
-
     }
 
     public void useSkill(String name) throws GameException{
