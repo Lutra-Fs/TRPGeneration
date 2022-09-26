@@ -28,10 +28,12 @@ public class Player {
 
     }
 
-    void buy(Backpack.Thing t){
+    void buy(Backpack.Thing t) throws GameException {
         if (money >= t.price) {
             money -= t.price;
             b.add(t);
+        } else {
+            throw new GameException("Not enough money");
         }
     }
 
