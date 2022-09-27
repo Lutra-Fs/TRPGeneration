@@ -7,7 +7,7 @@ public class Player {
     PlayerState p;
     Location curLoc;
     int money;
-    FighterState fightState;
+    FighterStat fightStat;
     Backpack b;
 
     enum PlayerState {
@@ -28,14 +28,16 @@ public class Player {
 
     }
 
-    void buy(Backpack.Thing t){
+    void buy(Backpack.Thing t) throws GameException {
         if (money >= t.price) {
             money -= t.price;
             b.add(t);
+        } else {
+            throw new GameException("Not enough money");
         }
     }
 
-    void use(Backpack.Thing t, FighterState f) throws GameException {
+    void use(Backpack.Thing t, FighterStat f) throws GameException {
         if (!b.things.remove(t)) {
             throw new GameException("No such thing");
         }

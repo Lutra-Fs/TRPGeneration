@@ -5,9 +5,9 @@ import java.util.List;
 public class Trader extends NPC {
     Backpack backpack;
 
-    Trader(String name, int x, int y) {
+    Trader(String name, int x, int y, Backpack b) {
         super(name, x, y);
-        backpack = new Backpack();
+        backpack = b;
     }
 
 
@@ -34,5 +34,9 @@ public class Trader extends NPC {
         } else {
             return backpack.sell(s);
         }
+    }
+
+    int getRemainingThingsSize() {
+        return backpack.getThings().size();
     }
 }
