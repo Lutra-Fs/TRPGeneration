@@ -4,14 +4,14 @@ import java.util.List;
 public class Fight extends Interaction {
 
     Enemy npc;
-    Player player;
+
     FighterStat playerStat;
     FighterStat enemyStat;
 
     boolean isPlayerTurn;
 
     public Fight(Player player, Enemy npc) {
-        this.player = player;
+        super(player);
         this.npc = npc;
         this.playerStat = player.fightStat;
         this.enemyStat = npc.state;
