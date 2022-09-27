@@ -44,7 +44,11 @@ public class Player {
         t.use(f);
     }
 
-    List<Backpack.Thing> getBackpack() {
+    Backpack getBackpack() {
+        return b;
+    }
+
+    List<Backpack.Thing> getThings() {
         return b.getThings();
     }
 
