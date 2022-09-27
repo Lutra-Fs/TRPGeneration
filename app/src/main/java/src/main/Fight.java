@@ -13,7 +13,7 @@ public class Fight extends Interaction {
     public Fight(Player player, Enemy npc) {
         this.player = player;
         this.npc = npc;
-        this.playerStat = player.fighterStat;
+        this.playerStat = player.fightStat;
         this.enemyStat = npc.state;
     }
     public List<Skill> getPlayerSkills(){
@@ -63,7 +63,7 @@ public class Fight extends Interaction {
             playerStat.setExp(exp);
             playerStat.levelUp();
             player.money += 5*levelDifference;
-            player.fightState = playerStat;
+            player.fightStat = playerStat;
         }
     }
 }
