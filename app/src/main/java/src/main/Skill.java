@@ -3,14 +3,18 @@ package src.main;
 public class Skill {
     String name;
     int atk;
+    int MP;
+
 
     /**
      * @param name Skill name
      * @param atk skill attack damage
+     * @param MP skill attack cost energy
      */
-    public Skill(String name, int atk) {
+    public Skill(String name, int atk, int MP) {
         this.name = name;
         this.atk = atk;
+        this.MP = MP;
     }
 
     /**
@@ -33,4 +37,10 @@ public class Skill {
     public void setAtk(int atk) {
         this.atk = atk;
     }
+
+    /**
+     * @return MP
+     */
+    public int getMP() {return MP;}
+    
 }
