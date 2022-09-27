@@ -61,18 +61,23 @@ public class FighterStat {
         this.MP = getMaxMP();
     }
 
-
-
     /**
      * @param exp fighter experience
      */
     public void setExp(int exp) {this.exp = exp;}
 
     /**
-     * @return HP
+     * @return HP Health
      */
     public int getHP() {
         return HP;
+    }
+
+    /**
+     * @return MP energy
+     */
+    public int getMP() {
+        return MP;
     }
 
     /**
@@ -87,13 +92,6 @@ public class FighterStat {
      */
     public int getMaxMP() {
         return MaxMP;
-    }
-
-    /**
-     * @return MP
-     */
-    public int getMP() {
-        return MP;
     }
 
     /**
@@ -180,6 +178,7 @@ public class FighterStat {
             throw new GameException();
         }else{
             this.HP = getHP() - calcSkillATK(s).getAtk();
+            this.MP = getMP() - s.getMP();
         }
     }
 
