@@ -22,7 +22,7 @@ public class Trade extends Interaction {
     @Override
     void interrupt() throws GameException {
         player.p = Player.PlayerState.NORMAL;
-        
+
         if (player.money < 0) {
             throw new GameException("You don't have enough money");
         } else if (npc.getRemainingThingsSize() == 0) {

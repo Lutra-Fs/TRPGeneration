@@ -24,7 +24,7 @@ public class Player {
 
     }
 
-    void interact(){
+    void interact() {
 
     }
 
@@ -44,7 +44,7 @@ public class Player {
         t.use(f);
     }
 
-    List<Backpack.Thing> getBackpack(){
+    List<Backpack.Thing> getBackpack() {
         return b.getThings();
     }
 

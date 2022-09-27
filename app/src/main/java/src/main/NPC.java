@@ -9,10 +9,12 @@ public abstract class NPC {
         loc = new Location(x, y);
     }
 
-    void interact(Player p){
+    void interact(Player p) {
         p.p = Player.PlayerState.INTERACTING;
     }
-    void interrupt(Player p){
+
+    void interrupt(Player p) {
         p.p = Player.PlayerState.NORMAL;
     }
+
 }

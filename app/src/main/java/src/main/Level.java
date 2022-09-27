@@ -23,9 +23,13 @@ public class Level {
         return this.curLevel;
     }
 
-    public int[][] getCoordinates() { return this.coordinates; }
+    public int[][] getCoordinates() {
+        return this.coordinates;
+    }
 
-    public Map<Location, Boolean> getCanSave() { return this.canSave; }
+    public Map<Location, Boolean> getCanSave() {
+        return this.canSave;
+    }
 
     public Map<Location, NPC> getNpcs() {
         return this.npcs;
@@ -44,9 +48,13 @@ public class Level {
         this.npcLocation = npcLocation;
     }
 
-    public void setCoordinates(int[][] coordinates) { this.coordinates = coordinates; }
+    public void setCoordinates(int[][] coordinates) {
+        this.coordinates = coordinates;
+    }
 
-    public void setCanSave(Map<Location, Boolean> canSave) { this.canSave = canSave; }
+    public void setCanSave(Map<Location, Boolean> canSave) {
+        this.canSave = canSave;
+    }
 
     // ADDs
     public void addNpc(Location location, NPC npc) {
@@ -57,9 +65,13 @@ public class Level {
         this.npcLocation.add(location);
     }
 
-    public void addCoordinates(int x, int y, int value) { this.coordinates[x][y] = value; }
+    public void addCoordinates(int x, int y, int value) {
+        this.coordinates[x][y] = value;
+    }
 
-    public void addCanSave(Location location, Boolean canSave) { this.canSave.put(location, canSave); }
+    public void addCanSave(Location location, Boolean canSave) {
+        this.canSave.put(location, canSave);
+    }
 
     // REMOVEs
     public void removeNpc(Location location) {
@@ -70,7 +82,9 @@ public class Level {
         this.npcLocation.remove(location);
     }
 
-    public void removeCoordinates(int x, int y) { this.coordinates[x][y] = 0; }
+    public void removeCoordinates(int x, int y) {
+        this.coordinates[x][y] = 0;
+    }
 
     public void removeCanSave(Location location) {
         this.canSave.remove(location);
