@@ -61,6 +61,8 @@ public class FighterStat {
         this.MP = getMaxMP();
     }
 
+
+
     /**
      * @param exp fighter experience
      */
@@ -158,17 +160,19 @@ public class FighterStat {
     }
 
     /**
-     * @throws GameException if exp not reach each level exp, throw exception
+     * @throws GameException if exp not reach each level exp, throw exception else level add 1
      */
     public void levelUp() throws GameException {
         if(getExp()<eachLevelExp){
             throw new GameException();
+        }else{
+            fighterLevel+=1;
         }
     }
 
     /**
      * @param s used Skill
-     * @throws GameException if attack damage is less than defence, throw exception
+     * @throws GameException if attack damage is less than defence, throw exception else loss HP
      */
     public void beAttacked(Skill s) throws GameException {
         // if attack damage is larger than defence, fighter received damage
