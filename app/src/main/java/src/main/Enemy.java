@@ -19,10 +19,11 @@ public class Enemy extends NPC {
     }
 
     /**
-     * @param p play state
+     * @param p player state
      */
     @Override
     void interact(Player p) {
+        //Set player state to fighting
         p.p = Player.PlayerState.FIGHTING;
     }
 
