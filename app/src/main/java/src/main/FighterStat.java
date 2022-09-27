@@ -5,6 +5,7 @@ public class FighterStat {
     int HP;
     int MP;
     int atk;
+
     int def;
     int fighterLevel;
     int exp;
@@ -173,6 +174,8 @@ public class FighterStat {
         // if attack damage is larger than defence, fighter received damage
         if(calcSkillATK(s).getAtk()<getDef()){
             throw new GameException();
+        }else{
+            this.HP = getHP() - calcSkillATK(s).getAtk();
         }
     }
 
