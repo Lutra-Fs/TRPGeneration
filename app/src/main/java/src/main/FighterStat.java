@@ -8,13 +8,12 @@ public class FighterStat {
     int def;
     int fighterLevel;
     int exp;
-
     int MaxHP;
     int MaxMP;
     final int eachLevelExp;
     List<Skill> skills;
 
-    public FighterStat(int HP, int MP, int atk, int def, int fighterLevel, int exp, int eachLevelExp,int MaxHp,int MaxMp, List<Skill> skills) {
+    public FighterStat(int HP, int MP, int atk, int def, int fighterLevel, int exp, int eachLevelExp, List<Skill> skills) {
         this.HP = HP;
         this.MP = MP;
         this.atk = atk;
@@ -23,9 +22,8 @@ public class FighterStat {
         this.exp = exp;
         this.eachLevelExp = eachLevelExp;
         this.skills = skills;
-        this.MaxMP = MaxMp;
-        this.MaxHP = MaxHp;
-
+        this.MaxMP = MP;
+        this.MaxHP = HP;
     }
     public List<Skill> getSkills() {
         return skills;
