@@ -37,8 +37,9 @@ public class FighterStat {
         return HP;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
+    public void setHP() throws GameException {
+        levelUp();
+        this.HP = getMaxHP();
     }
 
     public void addHP(int HP)  {
@@ -53,21 +54,38 @@ public class FighterStat {
         }
     }
 
-    public int getFighterLevel() {
-        return fighterLevel;
+    public int getMaxHP() {
+        return MaxHP;
     }
 
-    public void setFighterLevel(int fighterLevel) {
-        this.fighterLevel = fighterLevel;
+    public void setMaxHP(int maxHP) {
+        MaxHP = maxHP;
+    }
+
+    public int getMaxMP() {
+        return MaxMP;
+    }
+
+    public void setMaxMP(int maxMP) {
+        MaxMP = maxMP;
     }
 
     public int getMP() {
         return MP;
     }
 
-    public void setMP(int MP) {
-        this.MP = MP;
+    public void setMP() throws GameException {
+        levelUp();
+        this.MP = getMaxMP();
     }
+    public int getFighterLevel() {
+        return fighterLevel;
+    }
+    public void setFighterLevel(int fighterLevel) {
+        this.fighterLevel = fighterLevel;
+    }
+
+
 
     public int getAtk() {
         return atk;
