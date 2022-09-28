@@ -63,13 +63,13 @@ class FightTest {
     @Test
     void setHPTest() {
         fighterStat.setHp(20);
-        assertEquals(10, fighterStat.getHp(), "incorrect add HP");
+        assertEquals(20, fighterStat.getHp(), "incorrect add HP");
     }
 
     @Test
     void setMPTest(){
         fighterStat.setMp(15);
-        assertEquals(10, fighterStat.getMp(), "incorrect MP");
+        assertEquals(15, fighterStat.getMp(), "incorrect MP");
     }
 
     @Test
