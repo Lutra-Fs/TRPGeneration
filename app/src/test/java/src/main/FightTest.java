@@ -32,7 +32,6 @@ class FightTest {
         assertEquals("base_attack", fighterStat.getSkills().get(0).getName(), "Incorrect skill name ");
 
     }
-
     @Test
     void getSkillListAtkTest() {
         assertEquals(8, fighterStat.getSkills().get(1).getAtk(), "Incorrect skill attack ");
@@ -62,52 +61,60 @@ class FightTest {
     }
 
     @Test
-    void addHPTest1() {
-        fighterStat.addHP(10);
+    void setHPTest() {
+        fighterStat.setHp(20);
         assertEquals(10, fighterStat.getHp(), "incorrect add HP");
     }
 
     @Test
-    void addHPTest2() throws GameException {
+    void setMPTest(){
+        fighterStat.setMp(15);
+        assertEquals(10, fighterStat.getMp(), "incorrect MP");
+    }
+
+    @Test
+    void resetHPTest(){
+        fighterStat.setHp(5);
+        fighterStat.resetHP();
+        assertEquals(10, fighterStat.getHp(), "incorrect reset HP");
+    }
+    @Test
+    void resetMPTest(){
+        fighterStat.setMp(5);
+        fighterStat.resetMP();
+        assertEquals(10, fighterStat.getMp(), "incorrect reset MP");
+    }
+
+    @Test
+    void beAttackTest(){
         fighterStat.beAttacked(skill2);
-        fighterStat.addHP(5);
-        assertEquals(7, fighterStat.getHp(), "incorrect add HP");
+        assertEquals(3, fighterStat.getHp(), "incorrect remain HP, check atk calculation");
     }
 
     @Test
-    void addMPTest1() throws GameException {
-        fighterStat.beAttacked(skill3);
-        fighterStat.addMP(5);
-        assertEquals(9, fighterStat.getMp(), "incorrect MP");
+    void isDeadTest(){
+        fighterStat.setHp(-1);
+        assertTrue(fighterStat.isDead());
     }
-
     @Test
-    void MPCostTest() throws GameException {
-        fighterStat.beAttacked(skill3);
-        assertEquals(4, fighterStat.getMp(), "incorrect MP");
+    void level0CalcSkillAtkTest() {
+        Skill s = fighterStat.calcSkillATK(skill3);
+        assertEquals(10, s.getAtk(), "incorrect atk calculation");
     }
-
     @Test
-    void beAttackTest() throws GameException {
-        fighterStat.beAttacked(skill2);
-        assertEquals(2, fighterStat.getHp(), "incorrect HP");
+    void level1CalcSkillAtkTest() {
+        fighterStat.fighterLevel = 1;
+        Skill s = fighterStat.calcSkillATK(skill3);
+        assertEquals(20, s.getAtk(), "incorrect atk calculation");
     }
-
     @Test
-    void beAttackExceptionTest() {
+    void getSkillByNameTest(){
         boolean thrown = false;
         try {
-            fighterStat.beAttacked(skill1);
+            fighterStat.getSkillByName("wqeqwe");
         } catch (GameException e) {
             thrown = true;
         }
         assertTrue(thrown);
     }
-
-    @Test
-    void isDeadTest() throws GameException {
-        fighterStat.beAttacked(skill3);
-        assertTrue(fighterStat.isDead());
-    }
-
 }
