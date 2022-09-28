@@ -6,7 +6,6 @@ public class FighterStat {
     int hp;
     int mp;
     int atk;
-
     int def;
     int fighterLevel;
     int exp;
@@ -46,7 +45,7 @@ public class FighterStat {
     }
 
     /**
-     * @throws GameException if level up is invalid
+     * set HP to maxHP
      */
     public void resetHP() {
         // If level up, the HP set to MaxHP
@@ -54,14 +53,18 @@ public class FighterStat {
     }
 
     /**
-     * @throws GameException if level up is invalid
+     * set MP to maxMP
      */
     public void resetMP() {
         // If level up, the MP set to MaxMP
         this.mp = getMaxMP();
     }
 
+    /**
+     * @param hp new HP
+     */
     void setHp(int hp) {
+        //HP cannot exceed maxHP
         if (hp > getMaxHP()) {
             this.hp = getMaxHP();
         }
@@ -71,7 +74,11 @@ public class FighterStat {
         this.hp = hp;
     }
 
+    /**
+     * @param mp Nnew MP
+     */
     void setMp(int mp) {
+        //MP cannot exceed maxMP
         if (mp > getMaxMP()) {
             this.mp = getMaxMP();
         }
@@ -151,20 +158,22 @@ public class FighterStat {
         return getSkill(0);
     }
 
+    /**
+     * @return experience of each level
+     */
     int getExpPerLevel() {
         return expPerLevel;
     }
 
     /**
-     * @param hp if current hp plus adding hp is not exceed maxHP, Current hp add hp
+     * @param hp Current HP add incoming HP
      */
     public void addHP(int hp) {
-        // hp cannot exceed maxHP
         setHp(getHp() + hp);
     }
 
     /**
-     * @param mp if current mp plus adding mp is not exceed maxHP, Current mp add mp
+     * @param mp Current MP add incoming MP
      */
     public void addMP(int mp) {
         // mp cannot exceed maxMP
@@ -228,6 +237,11 @@ public class FighterStat {
         return getHp() <= 0;
     }
 
+    /**
+     * @param name SKill name
+     * @return Skill
+     * @throws GameException if skill invalid, throw exception
+     */
     public Skill getSkillByName(String name) throws GameException {
         for (Skill s : skills) {
             if (s.getName().equals(name)) {
