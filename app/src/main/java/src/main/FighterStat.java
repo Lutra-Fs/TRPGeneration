@@ -61,6 +61,8 @@ public class FighterStat {
     }
 
     /**
+     * This method is to make the HP is not exceed the maxHP
+     *
      * @param hp new HP
      */
     void setHp(int hp) {
@@ -75,7 +77,9 @@ public class FighterStat {
     }
 
     /**
-     * @param mp Nnew MP
+     * This method is to make the MP is not exceed the maxMP
+     *
+     * @param mp new MP
      */
     void setMp(int mp) {
         //MP cannot exceed maxMP
@@ -181,11 +185,12 @@ public class FighterStat {
     }
 
     /**
+     * THis method is to calculate the skill attack according to fighter level
+     *
      * @param s skill chose by user
      * @return skill with new damage value
      */
     public Skill calcSkillATK(Skill s) {
-        // Calculate skill damage according to fighter level
         int damage = s.getAtk();
         damage += getFighterLevel() * 10;
         s.setAtk(damage);
@@ -194,6 +199,9 @@ public class FighterStat {
 
 
     /**
+     * This method is to determine if fighter is valid to level up
+     * Increase attribute when fighter level up
+     *
      * @throws GameException if exp not reach each level exp, throw exception else level add 1
      */
     public void levelUp() throws GameException {
