@@ -73,7 +73,7 @@ public class FighterStat {
         if (hp < 0) {
             this.hp = 0;
         }
-        //this.hp = hp;
+        this.hp = hp;
     }
 
     /**
@@ -89,7 +89,7 @@ public class FighterStat {
         if (mp < 0) {
             this.mp = 0;
         }
-        //this.mp = mp;
+        this.mp = mp;
     }
 
     /**
