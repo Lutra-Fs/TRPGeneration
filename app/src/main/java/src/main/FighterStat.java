@@ -225,9 +225,8 @@ public class FighterStat {
      * then defender calculate the actual damage.
      *
      * @param s the skill which has calculated damage by the attacker's atk
-     * @throws GameException if attack damage is less than defence, throw exception else loss HP
      */
-    public void beAttacked(Skill s) throws GameException {
+    public void beAttacked(Skill s) {
         // if attack damage is larger than defence, fighter received damage
         s.setAtk(s.getAtk() - (int) (getDef() * 0.25)); // consider defence
         if (s.getAtk() < getDef()) {
