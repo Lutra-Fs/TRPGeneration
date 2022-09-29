@@ -42,7 +42,6 @@ public class SaveParser {
         return game;
     }
 
-
     /**
      * archive
      * @param s Game object
