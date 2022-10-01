@@ -16,6 +16,9 @@ public class Level {
 
     static String gamePath;
 
+    int maxX;
+    int maxY;
+
     public Level(int curLevel, int maxX, int maxY, boolean[][] coordinates, Map<Location, NPC> npcs, Set<Location> npcLocation, Location startLoc, Location endLoc) {
         this.curLevel = curLevel;
         this.coordinates = coordinates;
@@ -23,6 +26,8 @@ public class Level {
         this.npcLocation = npcLocation;
         this.startLoc = startLoc;
         this.endLoc = endLoc;
+        this.maxX = maxX;
+        this.maxY = maxY;
         Location.setMax(maxX, maxY);
     }
 
