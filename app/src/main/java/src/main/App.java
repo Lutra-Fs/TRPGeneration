@@ -23,6 +23,7 @@ import java.util.List;
 public class App {
     static BasicWindow window = new BasicWindow();
     private static Screen screen;
+    static Game game;
 
     public static void main(String[] args) throws Exception {
         // Setup terminal and screen layers
@@ -93,9 +94,9 @@ public class App {
                 final String gamePath = mapPath.getText();
                 System.out.println(new File(gamePath).getAbsolutePath());
                 try {
-                    Game curGame = SaveParser.loadGame(gamePath);
-                    curGame.player.name = playerName[0];
-                    gameStart.setPreferredSize(new TerminalSize(Location.maxX, Location.maxY));
+                    game = SaveParser.loadGame(gamePath);
+                    game.player.name = playerName[0];
+                    gameStart.setPreferredSize(new TerminalSize(Location.maxX , Location.maxY));
                     startNewGame.removeAllComponents();
                     window.setComponent(gameStart);
                 } catch (IOException e) {
