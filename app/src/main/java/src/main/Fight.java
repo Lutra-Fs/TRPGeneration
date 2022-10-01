@@ -138,7 +138,7 @@ public class Fight extends Interaction {
 
 
     /**
-     * calculate if the fight is end
+     * calculate if the fight is ended
      *
      * @return true if fight is end (player or npc is dead)
      * @author Juhao Tao
