@@ -14,6 +14,7 @@ public class SaveParser extends Interaction {
      *
      * @param p the player
      * @author Bo ZHANG
+     * @author Xiangda Li
      */
     SaveParser(Player p) {
         super(p);
@@ -96,6 +97,8 @@ public class SaveParser extends Interaction {
      * @param path path of the save file relative to 'saves' folder under the project root
      * @return the game
      * @throws IOException if the file cannot be read
+     * @author Bo ZHANG
+     * @author Xiangda Li
      */
     static void loadSave(String path, Player p, Level l) throws IOException {
         if (path.contains("..")) {
@@ -112,6 +115,8 @@ public class SaveParser extends Interaction {
      *
      * @param gamePath relative path to 'Games' folder which is under the root of the game
      * @return the game object
+     * @author Bo ZHANG
+     * @author Xiangda Li
      */
     static Game loadGame(String gamePath) throws IOException {
         // sanitize the path
