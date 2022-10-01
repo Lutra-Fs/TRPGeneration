@@ -1,4 +1,4 @@
-# TRPGeration
+# TRPGeneration
 
 a simple RPG game engine.
 Copyright (C) 2022 Bo ZHANG; Jingqi DOU; Juhao TAO; Xiangda LI; Ge ZHAN

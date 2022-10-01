@@ -13,8 +13,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+
 
 
 public class App {
@@ -63,7 +62,7 @@ public class App {
             mainMenuPanel.addComponent(new Button("About", () -> {
                 new MessageDialogBuilder()
                         .setTitle("About")
-                        .setText("TRPGeration\n" +
+                        .setText("TRPGeneration\n" +
                                 "a simple RPG game engine.\n" +
                                 "Copyright (C) 2022  Bo ZHANG; Jingqi DOU; Juhao TAO; Xiangda LI; Ge ZHAN\n" +
                                 "This program is free software: you can redistribute it and/or modify\n" +
