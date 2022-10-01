@@ -1,0 +1,18 @@
+{
+  "money": 500,
+  "fightStat": {
+    "hp": 1000,
+    "mp": 1000,
+    "atk": 100,
+    "def": 100,
+    "expPerLevel": 50,
+    "skills": [
+      {
+        "name": "skill1",
+        "mp": 100,
+        "atk": 300
+      }
+    ]
+  },
+  "b": {}
+}
