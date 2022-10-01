@@ -78,9 +78,27 @@ public class Backpack {
      * constructor
      *
      * @param things things in backpack
+     * @author Bo ZHANG
      */
     Backpack(List<Thing> things) {
         this.things = things;
+    }
+
+    /**
+     * use a thing
+     *
+     * @param t    thing to use
+     * @param stat fighter stat
+     * @throws GameException when no such thing
+     * @author Bo ZHANG
+     */
+    void use(Thing t, FighterStat stat) throws GameException {
+        if (things.contains(t)) {
+            t.use(stat);
+            things.remove(t);
+        } else {
+            throw new GameException("No such thing");
+        }
     }
 
     @Override
@@ -111,16 +129,36 @@ public class Backpack {
         final int price;
         final int recover;
 
+        /**
+         * apply the thing to the f given
+         *
+         * @param f the fighter to apply the thing on
+         * @author Bo ZHANG
+         */
         void use(FighterStat f) {
             f.addHP(recover);
         }
 
+        /**
+         * constructor
+         *
+         * @param name    name of thing
+         * @param price   price of thing
+         * @param recover recover of thing
+         * @author Bo ZHANG
+         */
         Thing(String name, int price, int recover) {
             this.name = name;
             this.price = price;
             this.recover = recover;
         }
 
+        /**
+         * get the name of thing
+         *
+         * @return name
+         * @author Bo ZHANG
+         */
         public String getName() {
             return name;
         }

@@ -11,6 +11,8 @@ public class Enemy extends NPC {
      * @param y     location y-coordinate
      * @param level NPC level
      * @param state NPC statement
+     * @author Juhao Tao
+     * @author Bo ZHANG
      */
     public Enemy(String name, int x, int y, int level, FighterStat state) {
         super(name, x, y);
@@ -18,9 +20,6 @@ public class Enemy extends NPC {
         this.state = state;
     }
 
-    /**
-     * @param p player state
-     */
     @Override
     void interact(Player p) {
         //Set player state to fighting
@@ -32,6 +31,11 @@ public class Enemy extends NPC {
         ELITE,
         BOSS;
 
+        /**
+         * @param level level of enemy
+         * @return EnemyState
+         * @author Bo ZHANG
+         */
         static EnemyState getEnemyState(int level) {
             return switch (level) {
                 case 2 -> ELITE;
@@ -41,6 +45,11 @@ public class Enemy extends NPC {
         }
     }
 
+    /**
+     * get the level of enemy
+     * @return level
+     * @author Bo ZHANG
+     */
     EnemyState getLevel() {
         return level;
     }
