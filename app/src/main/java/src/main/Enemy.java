@@ -26,6 +26,16 @@ public class Enemy extends NPC {
         p.p = Player.PlayerState.FIGHTING;
     }
 
+    /**
+     * get the level of enemy
+     *
+     * @return level
+     * @author Bo ZHANG
+     */
+    EnemyState getLevel() {
+        return level;
+    }
+
     enum EnemyState {
         NORMAL,
         ELITE,
@@ -43,14 +53,5 @@ public class Enemy extends NPC {
                 default -> NORMAL; // incl. level 1
             };
         }
-    }
-
-    /**
-     * get the level of enemy
-     * @return level
-     * @author Bo ZHANG
-     */
-    EnemyState getLevel() {
-        return level;
     }
 }

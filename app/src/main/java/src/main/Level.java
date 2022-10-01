@@ -1,21 +1,18 @@
 package src.main;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 public class Level {
+    static String gamePath;
+    final int curLevel;
+    final Location startLoc;
+    final Location endLoc;
     // boolean in coordinates: true = wall, false = empty
     boolean[][] coordinates;
-    final int curLevel;
     Map<Location, NPC> npcs;
     Set<Location> npcLocation;
-
-    final Location startLoc;
-
-    final Location endLoc;
-
-    static String gamePath;
-
     int maxX;
     int maxY;
 
@@ -45,6 +42,15 @@ public class Level {
         Location.setMax(maxX, maxY);
     }
 
+    /**
+     * save the path of the game for next level use.
+     *
+     * @param path the path of the game
+     * @author Bo ZHANG
+     */
+    static synchronized void setGamePath(String path) {
+        gamePath = path;
+    }
 
     /**
      * check if the location contains a NPC
@@ -94,16 +100,6 @@ public class Level {
             SaveParser.loadNextLevel(this);
             p.curLoc = this.startLoc;
         }
-    }
-
-    /**
-     * save the path of the game for next level use.
-     *
-     * @param path the path of the game
-     * @author Bo ZHANG
-     */
-    static synchronized void setGamePath(String path) {
-        gamePath = path;
     }
 
     /**

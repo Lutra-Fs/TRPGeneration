@@ -1,22 +1,10 @@
 package src.main;
 
 public class Location {
-    int x;
-    int y;
     static int maxX = 0;
     static int maxY = 0;
-
-    /**
-     * set the max x and y of the map
-     *
-     * @param x max x
-     * @param y max y
-     * @author Bo ZHANG
-     */
-    static synchronized void setMax(int x, int y) {
-        maxX = x;
-        maxY = y;
-    }
+    int x;
+    int y;
 
     /**
      * constructor of location
@@ -31,6 +19,18 @@ public class Location {
         }
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * set the max x and y of the map
+     *
+     * @param x max x
+     * @param y max y
+     * @author Bo ZHANG
+     */
+    static synchronized void setMax(int x, int y) {
+        maxX = x;
+        maxY = y;
     }
 
     /**

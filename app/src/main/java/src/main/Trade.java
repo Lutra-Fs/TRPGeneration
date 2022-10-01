@@ -4,6 +4,19 @@ public class Trade extends Interaction {
     Trader npc;
 
     /**
+     * constructor
+     *
+     * @param p   player
+     * @param npc npc
+     * @author Bo ZHANG
+     */
+
+    Trade(Player p, Trader npc) {
+        super(p);
+        this.npc = npc;
+    }
+
+    /**
      * trade with npc, sell a thing from npc to player
      *
      * @param s thing to sell thing's name || index
@@ -19,19 +32,6 @@ public class Trade extends Interaction {
         if (npc.getRemainingThingsSize() == 0) {
             interrupt();
         }
-    }
-
-    /**
-     * constructor
-     *
-     * @param p   player
-     * @param npc npc
-     * @author Bo ZHANG
-     */
-
-    Trade(Player p, Trader npc) {
-        super(p);
-        this.npc = npc;
     }
 
     /**

@@ -6,11 +6,12 @@ public class Talk extends Interaction {
 
     /**
      * Constructor for Talk
-     * @param p the player
+     *
+     * @param p   the player
      * @param npc the npc
      * @author Jingqi DOU
      */
-    Talk(Player p,TalkNPC npc) {
+    Talk(Player p, TalkNPC npc) {
         super(p);
         this.npc = npc;
         curSentence = npc.firstSentence;
@@ -19,6 +20,7 @@ public class Talk extends Interaction {
     /**
      * turn to the next sentence
      * for npc to use
+     *
      * @author Jingqi DOU
      */
     void nextSentence() {
@@ -31,6 +33,7 @@ public class Talk extends Interaction {
 
     /**
      * turn to the next sentence with a choice
+     *
      * @param index the index of the choice
      * @throws GameException if the index is out of range
      * @author Jingqi DOU
@@ -42,6 +45,7 @@ public class Talk extends Interaction {
             throw new GameException("No such sentence");
         }
     }
+
     @Override
     void interrupt() {
         player.p = Player.PlayerState.NORMAL;

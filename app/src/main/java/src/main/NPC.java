@@ -1,10 +1,8 @@
 package src.main;
 
-import java.io.IOException;
-
 public abstract class NPC {
-    Location loc;
     final String name;
+    Location loc;
 
     /**
      * constructor for NPC

@@ -7,6 +7,21 @@ public class Backpack {
     List<Thing> things;
 
     /**
+     * constructor
+     *
+     * @param things things in backpack
+     * @author Bo ZHANG
+     */
+    Backpack(List<Thing> things) {
+        this.things = things;
+    }
+
+
+    Backpack() {
+        this.things = new LinkedList<>();
+    }
+
+    /**
      * return a thing that in the given index of backpack
      *
      * @param index index of thing
@@ -16,7 +31,6 @@ public class Backpack {
     Thing sell(int index) {
         return things.remove(index);
     }
-
 
     /**
      * get things in backpack
@@ -89,20 +103,6 @@ public class Backpack {
     }
 
     /**
-     * constructor
-     *
-     * @param things things in backpack
-     * @author Bo ZHANG
-     */
-    Backpack(List<Thing> things) {
-        this.things = things;
-    }
-
-    Backpack() {
-        this.things = new LinkedList<>();
-    }
-
-    /**
      * use a thing
      *
      * @param t    thing to use
@@ -158,16 +158,6 @@ public class Backpack {
         int amount = 1;
 
         /**
-         * apply the thing to the f given
-         *
-         * @param f the fighter to apply the thing on
-         * @author Bo ZHANG
-         */
-        void use(FighterStat f) {
-            f.addHP(recover);
-        }
-
-        /**
          * constructor
          *
          * @param name    name of thing
@@ -179,6 +169,16 @@ public class Backpack {
             this.name = name;
             this.price = price;
             this.recover = recover;
+        }
+
+        /**
+         * apply the thing to the f given
+         *
+         * @param f the fighter to apply the thing on
+         * @author Bo ZHANG
+         */
+        void use(FighterStat f) {
+            f.addHP(recover);
         }
 
         /**

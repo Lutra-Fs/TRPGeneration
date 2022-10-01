@@ -1,7 +1,5 @@
 package src.main;
 
-import java.io.IOException;
-
 public class Saver extends NPC {
     /**
      * constructor for NPC

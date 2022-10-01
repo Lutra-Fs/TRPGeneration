@@ -12,12 +12,12 @@ Map Interaction:
 
 As a game designer, I want the character to decide fight to enemies or not when it moves in front of them.
 
-As a game designer, I want the character to open treasure boxes to increase health, attack ability or defence when it stands on them.
+As a game designer, I want the character to open treasure boxes to increase health, attack ability or defence when it
+stands on them.
 
 As a game designer, I want character to move faster once it receives faster boots.
 
-
-Enemies: 
+Enemies:
 
 As a player, I want to see the enemy's armor level when facing an enemy.
 
@@ -36,7 +36,6 @@ Character attributes:
 As a designer, I want character has health level and attack ability attributes.
 
 As a player, I want to have a table to show character's health level and attack ability.
-
 
 Maze/Map/Level:
 
@@ -60,9 +59,11 @@ Save/Loading a game:
 
 As a player, I want to be able to save and load my game so that I can continue playing at a later time.
 
-As a player, I want to be able to save the game automatically so that I don’t have to worry about losing my progress or re-doing the game.
+As a player, I want to be able to save the game automatically so that I don’t have to worry about losing my progress or
+re-doing the game.
 
-As a developer, I want to be able to save and load the game so that I can test the game without having to play through the entire game.
+As a developer, I want to be able to save and load the game so that I can test the game without having to play through
+the entire game.
 
 As a player, I want to be able to manage my save files so that I can delete old save files.
 

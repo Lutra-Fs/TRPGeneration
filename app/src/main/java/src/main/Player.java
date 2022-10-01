@@ -10,16 +10,6 @@ public class Player {
     FighterStat fightStat;
     Backpack b;
 
-    enum PlayerState {
-        NORMAL,
-        FIGHTING,
-        TRADING,
-        TALKING,
-        INTERACTING,
-        SAVING
-    }
-    
-
     /**
      * buy a thing from the trader
      *
@@ -66,6 +56,15 @@ public class Player {
      */
     List<Backpack.Thing> getThings() {
         return b.getThings();
+    }
+
+    enum PlayerState {
+        NORMAL,
+        FIGHTING,
+        TRADING,
+        TALKING,
+        INTERACTING,
+        SAVING
     }
 
 }

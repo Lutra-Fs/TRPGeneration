@@ -3,6 +3,7 @@ package src.main;
 import java.util.List;
 
 public class FighterStat {
+    final int expPerLevel;
     int hp;
     int mp;
     int atk;
@@ -11,7 +12,6 @@ public class FighterStat {
     int exp;
     int maxHP;
     int maxMP;
-    final int expPerLevel;
     List<Skill> skills;
 
     /**
@@ -71,6 +71,14 @@ public class FighterStat {
     }
 
     /**
+     * @return HP Health
+     * @author Juhao Tao
+     */
+    int getHp() {
+        return hp;
+    }
+
+    /**
      * Set hp to a new value
      * This method make sure hp is not larger than maxHP or smaller than 0
      *
@@ -90,6 +98,14 @@ public class FighterStat {
     }
 
     /**
+     * @return MP energy
+     * @author Juhao Tao
+     */
+    int getMp() {
+        return mp;
+    }
+
+    /**
      * Set mp to a new value
      * This method make sure mp is not larger than maxMP or smaller than 0
      *
@@ -106,30 +122,6 @@ public class FighterStat {
             this.mp = 0;
         }
         this.mp = mp;
-    }
-
-    /**
-     * @param exp fighter experience
-     * @author Bo ZHANG
-     */
-    void setExp(int exp) {
-        this.exp = exp;
-    }
-
-    /**
-     * @return HP Health
-     * @author Juhao Tao
-     */
-    int getHp() {
-        return hp;
-    }
-
-    /**
-     * @return MP energy
-     * @author Juhao Tao
-     */
-    int getMp() {
-        return mp;
     }
 
     /**
@@ -170,6 +162,14 @@ public class FighterStat {
      */
     int getExp() {
         return exp;
+    }
+
+    /**
+     * @param exp fighter experience
+     * @author Bo ZHANG
+     */
+    void setExp(int exp) {
+        this.exp = exp;
     }
 
     /**
