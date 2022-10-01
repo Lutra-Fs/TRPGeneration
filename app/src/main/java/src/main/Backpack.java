@@ -5,23 +5,36 @@ import java.util.List;
 public class Backpack {
     List<Thing> things;
 
+    /**
+     * return a thing that in the given index of backpack
+     *
+     * @param index index of thing
+     * @return thing
+     * @author Bo ZHANG
+     */
     Thing sell(int index) {
         return things.remove(index);
     }
 
-    void buy(Thing t) {
-        things.add(t);
-    }
 
+    /**
+     * get things in backpack
+     *
+     * @return things
+     * @author Bo ZHANG
+     */
     List<Thing> getThings() {
         return things;
     }
 
-    Thing sell(Thing t) {
-        things.remove(t);
-        return t;
-    }
-
+    /**
+     * sell a thing that matches the given name
+     *
+     * @param name name of thing
+     * @return the thing that matches the given name
+     * @throws GameException when no such thing
+     * @author Bo ZHANG
+     */
     Thing sell(String name) throws GameException {
         for (Thing t : things) {
             if (t.name.equals(name)) {
@@ -32,17 +45,26 @@ public class Backpack {
         throw new GameException("No such thing");
     }
 
-    public void add(Thing t) {
+    /**
+     * add a thing to backpack
+     *
+     * @param t thing to add
+     * @author Bo ZHANG
+     */
+
+    void add(Thing t) {
         things.add(t);
     }
 
-    void use(Thing t, FighterStat f) throws GameException {
-        if (!things.remove(t)) {
-            throw new GameException("No such thing");
-        }
-        t.use(f);
-    }
 
+    /**
+     * sell a thing that matches the given name
+     *
+     * @param name name of thing
+     * @return the thing that matches the given name
+     * @throws GameException when no such thing
+     * @author Bo ZHANG
+     */
     Thing getThing(String name) throws GameException {
         for (Thing t : things) {
             if (t.name.equals(name)) {
@@ -52,6 +74,11 @@ public class Backpack {
         throw new GameException("No such thing");
     }
 
+    /**
+     * constructor
+     *
+     * @param things things in backpack
+     */
     Backpack(List<Thing> things) {
         this.things = things;
     }

@@ -3,12 +3,12 @@ package src.main;
 public class Location {
     int x;
     int y;
-    static int MAX_X;
-    static int MAX_Y;
+    static int maxX;
+    static int maxY;
 
-    void setMax(int x, int y) {
-        MAX_X = x;
-        MAX_Y = y;
+    static synchronized void setMax(int x, int y) {
+        maxX = x;
+        maxY = y;
     }
 
     Location(int x, int y) {

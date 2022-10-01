@@ -11,15 +11,32 @@ public class Trader extends NPC {
     }
 
 
+    /**
+     * Calling this method will change the player's state to trading
+     *
+     * @param p the player
+     */
     @Override
     void interact(Player p) {
         p.p = Player.PlayerState.TRADING;
     }
 
+    /**
+     * get the things in the trader's backpack
+     *
+     * @return a list, containing all the things in the trader's backpack
+     */
     List<Backpack.Thing> getCurrentThings() {
         return backpack.getThings();
     }
 
+    /**
+     * sold a thing to the player
+     *
+     * @param s a string, the name of the thing or the thing's index in the trader's backpack
+     * @return the thing with the name or index
+     * @throws GameException if the thing is not found
+     */
     Backpack.Thing sell(String s) throws GameException {
         // check if the s is a num and smaller than the size of the backpack
         // if so, return the thing at that index
@@ -36,6 +53,11 @@ public class Trader extends NPC {
         }
     }
 
+    /**
+     * get the number of things in the trader's backpack
+     *
+     * @return the number of things in the trader's backpack
+     */
     int getRemainingThingsSize() {
         return backpack.getThings().size();
     }
