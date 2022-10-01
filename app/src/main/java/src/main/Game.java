@@ -10,4 +10,12 @@ public class Game {
         player = p;
         level = l;
     }
+
+    static synchronized void setInteraction(Interaction i) {
+        interaction = i;
+    }
+
+    synchronized Interaction getInteraction() {
+        return interaction;
+    }
 }

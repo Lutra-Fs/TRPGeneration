@@ -159,13 +159,13 @@ public class Fight extends Interaction {
             throw new GameException.PlayerDeadException();
         } else {
             //increase the exp based on level different between fighters' level
-            int levelDifference = enemyStat.getFighterLevel() - playerStat.getFighterLevel();
+            int levelDifference = enemyStat.getLevel() - playerStat.getLevel();
             double e = Math.E;
             int exp = (int) Math.pow(e, levelDifference);
             playerStat.setExp(playerStat.getExp() + exp);
             //check if player level up
             int curLevel = playerStat.getExp() / playerStat.getExpPerLevel();
-            if (curLevel > playerStat.getFighterLevel()) {
+            if (curLevel > playerStat.getLevel()) {
                 playerStat.levelUp();
             }
             //Add money

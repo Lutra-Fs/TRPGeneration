@@ -106,5 +106,33 @@ public class Level {
         gamePath = path;
     }
 
+    /**
+     * get the surrounding locations of the location
+     *
+     * @param l the location to check
+     * @return a String array of the surrounding locations
+     * @author Bo ZHANG
+     * @see App#gameToPanel
+     */
+    String[][] getSurronding(Location l) {
+        String[][] surronding = new String[5][5];
+        for (int i = -2; i <= 2; i++) {
+            for (int j = -2; j <= 2; j++) {
+                if (l.x + i >= Location.maxX || l.x + i < 0 || l.y + j >= Location.maxY || l.y + j < 0) {
+                    surronding[i + 2][j + 2] = "";
+                    continue;
+                }
+                Location loc = new Location(l.x + i, l.y + j);
+                if (isWall(loc)) {
+                    surronding[i + 2][j + 2] = "wall";
+                } else if (isInteractable(loc)) {
+                    surronding[i + 2][j + 2] = "npc";
+                } else {
+                    surronding[i + 2][j + 2] = "empty";
+                }
+            }
+        }
+        return surronding;
+    }
 
 }

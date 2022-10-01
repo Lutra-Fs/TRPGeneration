@@ -82,9 +82,9 @@ public class SaveParser extends Interaction {
     }
 
     /**
-     * load a save file
+     * load a Player file
      *
-     * @param path the path of the save file
+     * @param path the path of the player file
      * @return the Player object
      * @throws IOException if the file doesn't exist
      * @author Bo ZHANG
@@ -135,7 +135,16 @@ public class SaveParser extends Interaction {
         path = "saves/" + path;
         p = loadPlayer(path + "/player.json");
         l = loadLevel(path + "/level.json");
-
+        File game = new File(path + "/game.json");
+        if (!game.exists()) {
+            throw new IOException("Cannot find game file");
+        }
+        try (FileReader reader = new FileReader(game)) {
+            // read the game path
+            BufferedReader br = new BufferedReader(reader);
+            String gamePath = br.readLine();
+            Level.setGamePath(gamePath);
+        }
     }
 
     /**
@@ -155,7 +164,7 @@ public class SaveParser extends Interaction {
         Player p = loadPlayer(gamePath + "/player.json");
         Level l = loadLevel(gamePath + "/levels/level1.json");
         Game g = new Game(p, l);
-        l.gamePath = gamePath;
+        Level.gamePath = gamePath;
         return g;
     }
 
@@ -167,7 +176,7 @@ public class SaveParser extends Interaction {
      * @author Bo ZHANG
      */
     static void loadNextLevel(Level l) throws IOException {
-        String path = l.gamePath + "/levels/level" + (l.curLevel + 1) + ".json";
+        String path = Level.gamePath + "/levels/level" + (l.curLevel + 1) + ".json";
         l = loadLevel(path);
     }
 

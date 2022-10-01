@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Player {
     String name;
-    PlayerState p;
+    PlayerState p = PlayerState.NORMAL;
     Location curLoc;
     int money;
     FighterStat fightStat;
@@ -18,16 +18,7 @@ public class Player {
         INTERACTING,
         SAVING
     }
-
-    /**
-     * interact with the npc that in the current location
-     *
-     * @author Bo ZHANG
-     */
-    void interact() {
-        // get npc from Level
-
-    }
+    
 
     /**
      * buy a thing from the trader
@@ -54,10 +45,7 @@ public class Player {
      * @author Bo ZHANG
      */
     void use(Backpack.Thing t, FighterStat f) throws GameException {
-        if (!b.things.remove(t)) {
-            throw new GameException("No such thing");
-        }
-        t.use(f);
+        b.use(t, f);
     }
 
     /**

@@ -1,5 +1,6 @@
 package src.main;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Backpack {
@@ -53,9 +54,22 @@ public class Backpack {
      */
 
     void add(Thing t) {
-        things.add(t);
+        if (things.contains(t)) {
+            //amount + 1
+            for (Thing thing : things) {
+                if (thing.equals(t)) {
+                    thing.amount++;
+                    break;
+                }
+            }
+        } else {
+            things.add(t);
+        }
     }
 
+    void add(String name, int price, int weight) {
+        things.add(new Thing(name, price, weight));
+    }
 
     /**
      * sell a thing that matches the given name
@@ -84,6 +98,10 @@ public class Backpack {
         this.things = things;
     }
 
+    Backpack() {
+        this.things = new LinkedList<>();
+    }
+
     /**
      * use a thing
      *
@@ -95,7 +113,15 @@ public class Backpack {
     void use(Thing t, FighterStat stat) throws GameException {
         if (things.contains(t)) {
             t.use(stat);
-            things.remove(t);
+            for (Thing thing : things) {
+                if (thing.equals(t)) {
+                    thing.amount--;
+                    if (thing.amount == 0) {
+                        things.remove(thing);
+                    }
+                    break;
+                }
+            }
         } else {
             throw new GameException("No such thing");
         }
@@ -124,10 +150,12 @@ public class Backpack {
         return things.hashCode();
     }
 
+
     class Thing {
         final String name;
         final int price;
         final int recover;
+        int amount = 1;
 
         /**
          * apply the thing to the f given

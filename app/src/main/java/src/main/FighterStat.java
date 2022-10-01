@@ -7,7 +7,7 @@ public class FighterStat {
     int mp;
     int atk;
     int def;
-    int fighterLevel;
+    int level;
     int exp;
     int maxHP;
     int maxMP;
@@ -26,12 +26,12 @@ public class FighterStat {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public FighterStat(int hp, int mp, int atk, int def, int expPerLevel, List<Skill> skills) {
+    FighterStat(int hp, int mp, int atk, int def, int expPerLevel, List<Skill> skills) {
         this.hp = hp;
         this.mp = mp;
         this.atk = atk;
         this.def = def;
-        this.fighterLevel = 1;
+        this.level = 1;
         this.expPerLevel = expPerLevel;
         this.skills = skills;
         this.maxMP = mp;
@@ -44,7 +44,7 @@ public class FighterStat {
      * @return List of skills
      * @author Bo ZHANG
      */
-    public List<Skill> getSkills() {
+    List<Skill> getSkills() {
         return skills;
     }
 
@@ -54,7 +54,7 @@ public class FighterStat {
      * @author Bo ZHANG
      * @author Juhao Tao
      */
-    public void resetHP() {
+    void resetHP() {
         // If level up, the HP set to MaxHP
         this.hp = getMaxHP();
     }
@@ -65,7 +65,7 @@ public class FighterStat {
      * @author Bo ZHANG
      * @author Juhao Tao
      */
-    public void resetMP() {
+    void resetMP() {
         // If level up, the MP set to MaxMP
         this.mp = getMaxMP();
     }
@@ -112,7 +112,7 @@ public class FighterStat {
      * @param exp fighter experience
      * @author Bo ZHANG
      */
-    public void setExp(int exp) {
+    void setExp(int exp) {
         this.exp = exp;
     }
 
@@ -120,7 +120,7 @@ public class FighterStat {
      * @return HP Health
      * @author Juhao Tao
      */
-    public int getHp() {
+    int getHp() {
         return hp;
     }
 
@@ -128,7 +128,7 @@ public class FighterStat {
      * @return MP energy
      * @author Juhao Tao
      */
-    public int getMp() {
+    int getMp() {
         return mp;
     }
 
@@ -136,7 +136,7 @@ public class FighterStat {
      * @return MaxHP
      * @author Juhao Tao
      */
-    public int getMaxHP() {
+    int getMaxHP() {
         return maxHP;
     }
 
@@ -144,7 +144,7 @@ public class FighterStat {
      * @return MaxMP
      * @author Juhao Tao
      */
-    public int getMaxMP() {
+    int getMaxMP() {
         return maxMP;
     }
 
@@ -152,15 +152,15 @@ public class FighterStat {
      * @return fighterLevel
      * @author Juhao Tao
      */
-    public int getFighterLevel() {
-        return fighterLevel;
+    int getLevel() {
+        return level;
     }
 
     /**
      * @return defence
      * @author Bo ZHANG
      */
-    public int getDef() {
+    int getDef() {
         return def;
     }
 
@@ -168,7 +168,7 @@ public class FighterStat {
      * @return experience
      * @author Bo ZHANG
      */
-    public int getExp() {
+    int getExp() {
         return exp;
     }
 
@@ -176,7 +176,7 @@ public class FighterStat {
      * @return chosen skill
      * @author Juhao Tao
      */
-    public Skill getSkill(int index) {
+    Skill getSkill(int index) {
         return skills.get(index);
     }
 
@@ -186,7 +186,7 @@ public class FighterStat {
      * @return skill with base attack
      * @author Juhao Tao
      */
-    public Skill getSkillAI() {
+    Skill getSkillAI() {
         return getSkill(0);
     }
 
@@ -205,7 +205,7 @@ public class FighterStat {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public void addHP(int hp) {
+    void addHP(int hp) {
         setHp(getHp() + hp);
     }
 
@@ -216,7 +216,7 @@ public class FighterStat {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public void addMP(int mp) {
+    void addMP(int mp) {
         // mp cannot exceed maxMP
         setMp(getMp() + mp);
     }
@@ -228,9 +228,9 @@ public class FighterStat {
      * @return skill with new damage value
      * @author Juhao Tao
      */
-    public Skill calcSkillATK(Skill s) {
+    Skill calcSkillATK(Skill s) {
         int damage = s.getAtk();
-        damage += getFighterLevel() * 10;
+        damage += getLevel() * 10;
         s.setAtk(damage);
         return s;
     }
@@ -244,11 +244,11 @@ public class FighterStat {
      * @author Bo ZHANG
      * @author Juhao Tao
      */
-    public void levelUp() throws GameException {
-        if (getExpPerLevel() * (getFighterLevel() + 1) > getExp()) {
+    void levelUp() throws GameException {
+        if (getExpPerLevel() * (getLevel() + 1) > getExp()) {
             throw new GameException("Not enough exp");
         }
-        fighterLevel++;
+        level++;
         // attribute increase
         maxHP += 20;
         maxMP += 15;
@@ -268,7 +268,7 @@ public class FighterStat {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public void beAttacked(Skill s) {
+    void beAttacked(Skill s) {
         // if attack damage is larger than defence, fighter received damage
         s.setAtk(s.getAtk() - (int) (getDef() * 0.25)); // consider defence
         if (s.getAtk() < getDef()) {
@@ -282,7 +282,7 @@ public class FighterStat {
      * @return if fighter is dead or not
      * @author Juhao Tao
      */
-    public boolean isDead() {
+    boolean isDead() {
         // /if HP is equal or lower than 0, fighter dead
         return getHp() <= 0;
     }
@@ -293,7 +293,7 @@ public class FighterStat {
      * @throws GameException if skill invalid, throw exception
      * @author Bo ZHANG
      */
-    public Skill getSkillByName(String name) throws GameException {
+    Skill getSkillByName(String name) throws GameException {
         for (Skill s : skills) {
             if (s.getName().equals(name)) {
                 return s;
@@ -301,4 +301,6 @@ public class FighterStat {
         }
         throw new GameException();
     }
+
+
 }
