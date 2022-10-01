@@ -10,14 +10,19 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.SwingTerminal;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import com.googlecode.lanterna.gui2.TextGUIGraphics;
+import com.googlecode.lanterna.gui2.DefaultTextGUIGraphics;
+
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.Object;
 import java.util.List;
 
 
 public class App {
     static BasicWindow window = new BasicWindow();
+    private static Screen screen;
 
     public static void main(String[] args) throws Exception {
         // Setup terminal and screen layers
@@ -71,8 +76,6 @@ public class App {
         startNewGame.addComponent(new Label("   "));
         startNewGame.addComponent(new Label("Please Enter the PATH of a Map:"));
         final TextBox mapPath = new TextBox(new TerminalSize(25, 1)).addTo(startNewGame);
-        final String gamePath = mapPath.getText();
-        System.out.println(new File(gamePath).getAbsolutePath());
 
         startNewGame.addComponent(new Label("Enter Your Player Name:"));
         final TextBox nameText = new TextBox(new TerminalSize(25, 1)).addTo(startNewGame);
@@ -87,14 +90,17 @@ public class App {
                 if (playerName[0].equals("")) {
                     playerName[0] = "Player";
                 }
+                final String gamePath = mapPath.getText();
                 System.out.println(new File(gamePath).getAbsolutePath());
                 try {
                     Game curGame = SaveParser.loadGame(gamePath);
                     curGame.player.name = playerName[0];
+                    gameStart.setPreferredSize(new TerminalSize(Location.maxX , Location.maxY));
+                    startNewGame.removeAllComponents();
+                    window.setComponent(gameStart);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         }).addTo(startNewGame);
 
@@ -112,20 +118,20 @@ public class App {
             }
         }).addTo(startNewGame);
 
-        //------------------Resume Game Menu------------------//
+//------------------Resume Game Menu------------------//
         resumeGame.setLayoutManager(new GridLayout(2));
         resumeGame.setPreferredSize(new TerminalSize(60, 5));
         resumeGame.addComponent(new Label("New Game"), GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER, true, false, 1, 1));
         resumeGame.addComponent(new Label("   "));
         resumeGame.addComponent(new Label("Please Enter the PATH of a Save:"));
         final TextBox saveText = new TextBox(new TerminalSize(25, 1)).addTo(resumeGame);
-        final String savePath = saveText.getText();
         resumeGame.addComponent(new Label("   "));
         resumeGame.addComponent(new Label("   "));
 
         new Button("Start Game!", new Runnable() {
             @Override
             public void run() {
+                final String savePath = saveText.getText();
                 try {
                     Game curGame = SaveParser.loadGame(savePath);
                 } catch (IOException e) {
@@ -150,7 +156,11 @@ public class App {
         resumeGame.addComponent(new Label("   "));
 
 //------------------New Game Start------------------//
-        gameStart.setPreferredSize(new TerminalSize(60, 5));
+        gameStart.setPreferredSize(new TerminalSize(Location.maxX , Location.maxY));
+        System.out.println(Location.maxX);
+        gameStart.setLayoutManager(new GridLayout(2));
+
+
 
 
         // when the game starts, display the main menu
