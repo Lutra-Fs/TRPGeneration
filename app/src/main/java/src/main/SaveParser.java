@@ -70,6 +70,9 @@ public class SaveParser extends Interaction {
     }
 
     static Player loadPlayer(String path) throws IOException {
+        if (path.contains("..")) {
+            throw new IOException("Invalid path");
+        }
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(path)) {
             return gson.fromJson(reader, Player.class);
@@ -77,6 +80,9 @@ public class SaveParser extends Interaction {
     }
 
     static Level loadLevel(String path) throws IOException {
+        if (path.contains("..")) {
+            throw new IOException("Invalid path");
+        }
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(path)) {
             return gson.fromJson(reader, Level.class);
@@ -92,6 +98,9 @@ public class SaveParser extends Interaction {
      * @throws IOException if the file cannot be read
      */
     static void loadSave(String path, Player p, Level l) throws IOException {
+        if (path.contains("..")) {
+            throw new IOException("Invalid path");
+        }
         path = "saves/" + path;
         p = loadPlayer(path + "/player.json");
         l = loadLevel(path + "/level.json");
@@ -101,12 +110,15 @@ public class SaveParser extends Interaction {
     /**
      * the method to load a game defination file
      *
-     * @param gamePath relative path to 'Games' folder which is the root of the game
+     * @param gamePath relative path to 'Games' folder which is under the root of the game
      * @return the game object
      */
     static Game loadGame(String gamePath) throws IOException {
-        Gson gson = new Gson();
-        String path = "Games/" + gamePath;
+        // sanitize the path
+        if (gamePath.contains("..")) {
+            throw new IOException("Invalid path");
+        }
+        gamePath = "Games/" + gamePath;
         Player p = loadPlayer(gamePath + "/player.json");
         Level l = loadLevel(gamePath + "/levels/level1.json");
         Game g = new Game(p, l);
@@ -115,7 +127,6 @@ public class SaveParser extends Interaction {
     }
 
     static void loadNextLevel(Level l) throws IOException {
-        Gson gson = new Gson();
         String path = l.gamePath + "/levels/level" + (l.curLevel + 1) + ".json";
         l = loadLevel(path);
     }
