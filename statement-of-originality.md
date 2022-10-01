@@ -12,13 +12,16 @@ member_declaration:
     name: Bo ZHANG
     uid: u7275896
   -
-    name: 
-    uid:
+    name: Jingqi DOU
+    uid: u7381573
   -
     name: 
     uid:
   -
     name: 
+    uid:
+  - 
+    name:
     uid:
 
 # list numbered references below (replace the example with your own references) 
