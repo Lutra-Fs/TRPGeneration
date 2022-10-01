@@ -1,41 +1,32 @@
 package src.main;
-import org.json.JSONException;
-import org.json.JSONObject;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.Writer;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
+import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.channels.AsynchronousFileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveParser {
     /**
      * read file
+     * @author Xiangda Li
      * @param path Where the documents are stored
      * @return Return the Game object
      */
-    public static Game saveFoldertoStatus(String path){
-        Game game = new Game();
+    public Game loadGameFromLocalFile(String path) {
+        Game game = null;
         try {
-            File jsonFile = new File("storage/sdcard/MyIdea/MyCompositions/" + path + ".json");
+            File jsonFile = new File(path);
             FileReader fileReader = new FileReader(jsonFile);
-
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
-            int ch = 0;
-            StringBuffer sb = new StringBuffer();
-            while ((ch = reader.read()) != -1) {
-                sb.append((char) ch);
-            }
-            fileReader.close();
-            reader.close();
-            String jsonStr = sb.toString();
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            game = (Game)jsonObject.get(path);
+            JsonReader reader = new JsonReader(fileReader);
+            game = new Gson().fromJson(reader, Game.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,23 +35,52 @@ public class SaveParser {
 
     /**
      * archive
-     * @param s Game object
-     * @param path  Where the document is read
+     *
+     * @param s    Game object
+     * @param path Where the document is read
      */
-    public static void statustoSaveFolder(Game s,String path){
-        JSONObject jsonObject = new JSONObject();
+    public void saveGameToLocalFile(Game s, String path) {
+        File jsonFile = new File(path);
+        try (FileWriter writer = new FileWriter(jsonFile)) {
+            new GsonBuilder().create().toJson(s, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * read file
+     *
+     * @param path Where the documents are stored
+     * @return Return the List of Players
+     */
+    public List<Player> loadPlayersFromLocalFile(String path) {
+        List<Player> players= null;
+        final Type PLAYERS_LIST_TYPE = new TypeToken<List<Player>>() {
+        }.getType();
         try {
-            //Create JSON format data with path as KEY Game as value
-            jsonObject.put(path,s);
-            //file path
-            File file = new File("storage/sdcard/MyIdea/MyCompositions/" + path + ".json");
-            //Write data to JSON file
-            Writer output = null;
-            output = new BufferedWriter(new FileWriter(file));
-            output.write(jsonObject.toString());
+            File jsonFile = new File(path);
+            FileReader fileReader = new FileReader(jsonFile);
+            JsonReader reader = new JsonReader(fileReader);
+            players = new Gson().fromJson(reader,PLAYERS_LIST_TYPE);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return players;
+    }
 
+    /**
+     * archive
+     *
+     * @param players    List of players
+     * @param path Where the document is read
+     */
+    public void savePlayersToLocalFile(List<Player> players, String path) {
+        File jsonFile = new File(path);
+        try (FileWriter writer = new FileWriter(jsonFile)) {
+            new GsonBuilder().create().toJson(players, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

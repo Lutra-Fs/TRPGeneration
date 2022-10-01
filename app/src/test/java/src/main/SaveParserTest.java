@@ -3,18 +3,39 @@
  */
 package src.main;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
-    @Test void statustoSaveFolder() {
+import java.util.ArrayList;
+import java.util.List;
+
+
+class SaveParserTest {
+    @Test
+    void testSaveAndLoadGame() {
         SaveParser saveParser = new SaveParser();
         Game game = new Game();
-        saveParser.statustoSaveFolder(game,"Archive I");
+        game.player_name = "testgame1";
+        saveParser.saveGameToLocalFile(game, "Archive1.json");
+        SaveParser loadParser = new SaveParser();
+        Game loaded = loadParser.loadGameFromLocalFile("Archive1.json");
+        assert loaded != null;
+        assert loaded.player_name != null;
+        assert loaded.player_name.equals("testgame1");
     }
 
-    @Test void saveFoldertoStatus() {
+    @Test
+    void testSaveAndLoadGamePlayer() {
         SaveParser saveParser = new SaveParser();
-        saveParser.saveFoldertoStatus("Archive I");
+        ArrayList<Player> players = new ArrayList<>();
+        Player p1 = new Player();
+        p1.name = "p1";
+        players.add(p1);
+        saveParser.savePlayersToLocalFile(players, "Players1.json");
+        SaveParser loadParser = new SaveParser();
+        List<Player> loaded = loadParser.loadPlayersFromLocalFile("Players1.json");
+        assert loaded != null;
+        assert loaded.size() == 1;
+        assert loaded.get(0).name.equals("p1");
     }
 }
