@@ -89,8 +89,8 @@ public class SaveParser extends Interaction {
         try (FileReader reader = new FileReader(path)) {
             Level l = gson.fromJson(reader, Level.class);
             Location.setMax(l.maxX, l.maxY);
+            return l;
         }
-
     }
 
     /**
