@@ -15,8 +15,8 @@ member_declaration:
     name: Jingqi DOU
     uid: u7381573
   -
-    name: 
-    uid:
+    name: Xiangda Li
+    uid: u7404965
   -
     name: 
     uid:
