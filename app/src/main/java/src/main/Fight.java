@@ -18,6 +18,7 @@ public class Fight extends Interaction {
         this.npc = npc;
         this.playerStat = player.fightStat;
         this.enemyStat = npc.state;
+        this.isPlayerTurn = true;
     }
 
     /**
