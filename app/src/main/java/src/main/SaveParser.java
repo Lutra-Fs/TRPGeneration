@@ -1,11 +1,13 @@
 package src.main;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.*;
+import com.google.gson.annotations.JsonAdapter;
 
 
 import java.io.*;
+import java.lang.reflect.Type;
 
 
 public class SaveParser extends Interaction {
@@ -83,9 +85,10 @@ public class SaveParser extends Interaction {
         if (path.contains("..")) {
             throw new IOException("Invalid path");
         }
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(NPC.class, new NPCAdapter()).create();
         try (FileReader reader = new FileReader(path)) {
-            return gson.fromJson(reader, Level.class);
+            Level l = gson.fromJson(reader, Level.class);
+            Location.setMax(l.maxX, l.maxY);
         }
 
     }
@@ -118,7 +121,7 @@ public class SaveParser extends Interaction {
         if (gamePath.contains("..")) {
             throw new IOException("Invalid path");
         }
-        gamePath = "Games/" + gamePath;
+        gamePath = "games/" + gamePath;
         Player p = loadPlayer(gamePath + "/player.json");
         Level l = loadLevel(gamePath + "/levels/level1.json");
         Game g = new Game(p, l);
@@ -134,6 +137,31 @@ public class SaveParser extends Interaction {
     @Override
     void interrupt() {
         player.p = Player.PlayerState.NORMAL;
+    }
+
+}
+
+class NPCAdapter implements JsonSerializer<Object>, JsonDeserializer<Object> {
+    private static final String CLASS_TYPE = "CLASS_TYPE";
+
+    @Override
+    public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        JsonObject jsonObject = json.getAsJsonObject();
+        String className = jsonObject.get(CLASS_TYPE).getAsString();
+        try {
+            return context.deserialize(jsonObject, Class.forName(className));
+        } catch (ClassNotFoundException e) {
+            throw new JsonParseException(e.getMessage());
+        }
+    }
+
+    @Override
+    public JsonElement serialize(Object src, Type typeOfSrc, JsonSerializationContext context) {
+        Gson gson = new Gson();
+        gson.toJson(src, src.getClass());
+        JsonObject jsonObject = gson.toJsonTree(src).getAsJsonObject();
+        jsonObject.addProperty(CLASS_TYPE, src.getClass().getName());
+        return jsonObject;
     }
 
 }
