@@ -31,7 +31,20 @@ application {
     mainClass = 'src.main.App'
 }
 
+javadoc {
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+    options.locale = 'en_US'
+}
+
+task createJavaDocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+    classpath += configurations.compileClasspath
+    destinationDir = file("$buildDir/docs/javadoc")
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
