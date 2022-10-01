@@ -43,6 +43,19 @@ public class Backpack {
         t.use(f);
     }
 
+    Thing getThing(String name) throws GameException {
+        for (Thing t : things) {
+            if (t.name.equals(name)) {
+                return t;
+            }
+        }
+        throw new GameException("No such thing");
+    }
+
+    Backpack(List<Thing> things) {
+        this.things = things;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Backpack: \n");
@@ -55,10 +68,9 @@ public class Backpack {
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (!(o instanceof Backpack)) {
+        if (!(o instanceof Backpack backpack)) {
             return false;
         }
-        Backpack backpack = (Backpack) o;
         return things.equals(backpack.things);
     }
 
@@ -94,11 +106,15 @@ public class Backpack {
         @Override
         public boolean equals(Object o) {
             if (o == this) return true;
-            if (!(o instanceof Thing)) {
+            if (!(o instanceof Thing thing)) {
                 return false;
             }
-            Thing thing = (Thing) o;
             return name.equals(thing.name) && price == thing.price && recover == thing.recover;
+        }
+
+        @Override
+        public int hashCode() {
+            return name.hashCode() + price ^ 3 + recover;
         }
 
     }
