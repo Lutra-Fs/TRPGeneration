@@ -3,8 +3,8 @@ package src.main;
 public class Location {
     int x;
     int y;
-    static int maxX;
-    static int maxY;
+    static int maxX = 0;
+    static int maxY = 0;
 
     /**
      * set the max x and y of the map
@@ -26,8 +26,51 @@ public class Location {
      * @author Bo ZHANG
      */
     Location(int x, int y) {
+        if (x < 0 || x >= maxX || y < 0 || y >= maxY) {
+            throw new IllegalArgumentException("Location out of bound");
+        }
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * get the location of the left of the current location
+     *
+     * @return the location of the left of the current location
+     * @author Bo ZHANG
+     */
+    Location getLeft() {
+        return new Location(x - 1, y);
+    }
+
+    /**
+     * get the location of the right of the current location
+     *
+     * @return the location of the right of the current location
+     * @author Bo ZHANG
+     */
+    Location getRight() {
+        return new Location(x + 1, y);
+    }
+
+    /**
+     * get the location of the up of the current location
+     *
+     * @return the location of the up of the current location
+     * @author Bo ZHANG
+     */
+    Location getUp() {
+        return new Location(x, y - 1);
+    }
+
+
+    /**
+     * get the location of the down of the current location
+     *
+     * @return the location of the down of the current location
+     * @author Bo ZHANG
+     */
+    Location getDown() {
+        return new Location(x, y + 1);
+    }
 }
