@@ -95,7 +95,7 @@ public class App {
                 try {
                     Game curGame = SaveParser.loadGame(gamePath);
                     curGame.player.name = playerName[0];
-                    gameStart.setPreferredSize(new TerminalSize(Location.maxX , Location.maxY));
+                    gameStart.setPreferredSize(new TerminalSize(Location.maxX, Location.maxY));
                     startNewGame.removeAllComponents();
                     window.setComponent(gameStart);
                 } catch (IOException e) {
@@ -156,11 +156,9 @@ public class App {
         resumeGame.addComponent(new Label("   "));
 
 //------------------New Game Start------------------//
-        gameStart.setPreferredSize(new TerminalSize(Location.maxX , Location.maxY));
-        System.out.println(Location.maxX);
-        gameStart.setLayoutManager(new GridLayout(2));
-
-
+        // set terminal size
+        gameStart.setPreferredSize(new TerminalSize(Location.maxX, Location.maxY));
+    
 
 
         // when the game starts, display the main menu
