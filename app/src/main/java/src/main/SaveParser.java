@@ -22,6 +22,15 @@ public class SaveParser extends Interaction {
         super(p);
     }
 
+    /**
+     * create a new save file from the current game
+     *
+     * @param g current game to save
+     * @throws IOException if the file cannot be created
+     * @author Bo ZHANG
+     * @author Xiangda Li
+     */
+
     static void createSaveFile(Game g) throws IOException {
         // create path, by default the save will be in saves folder
         Level l = g.level;
@@ -72,6 +81,14 @@ public class SaveParser extends Interaction {
         }
     }
 
+    /**
+     * load a save file
+     *
+     * @param path the path of the save file
+     * @return the Player object
+     * @throws IOException if the file doesn't exist
+     * @author Bo ZHANG
+     */
     static Player loadPlayer(String path) throws IOException {
         if (path.contains("..")) {
             throw new IOException("Invalid path");
@@ -82,6 +99,14 @@ public class SaveParser extends Interaction {
         }
     }
 
+    /**
+     * load a level file
+     *
+     * @param path the path of the level file
+     * @return the Level object
+     * @throws IOException if the file doesn't exist
+     * @author Bo ZHANG
+     */
     static Level loadLevel(String path) throws IOException {
         if (path.contains("..")) {
             throw new IOException("Invalid path");
@@ -134,6 +159,13 @@ public class SaveParser extends Interaction {
         return g;
     }
 
+    /**
+     * read next level from the game folder
+     *
+     * @param l the current level
+     * @throws IOException if the file cannot be read
+     * @author Bo ZHANG
+     */
     static void loadNextLevel(Level l) throws IOException {
         String path = l.gamePath + "/levels/level" + (l.curLevel + 1) + ".json";
         l = loadLevel(path);

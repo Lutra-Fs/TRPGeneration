@@ -12,6 +12,7 @@ public abstract class NPC {
      * @param name name of NPC
      * @param x    x coordinate of NPC
      * @param y    y coordinate of NPC
+     * @author Bo ZHANG
      */
     protected NPC(String name, int x, int y) {
         this.name = name;
@@ -23,8 +24,9 @@ public abstract class NPC {
      * The default implementation does nothing.
      *
      * @param p player
+     * @author Bo ZHANG
      */
-    void interact(Player p) throws IOException {
+    void interact(Player p) {
         p.p = Player.PlayerState.INTERACTING;
     }
 
@@ -32,6 +34,7 @@ public abstract class NPC {
      * fallback method, calling when there is no Interaction.
      *
      * @param p player
+     * @author Bo ZHANG
      */
     void interrupt(Player p) {
         p.p = Player.PlayerState.NORMAL;

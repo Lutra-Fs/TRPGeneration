@@ -9,13 +9,14 @@ public class Saver extends NPC {
      * @param name name of NPC
      * @param x    x coordinate of NPC
      * @param y    y coordinate of NPC
+     * @author Bo ZHANG
      */
     protected Saver(String name, int x, int y) {
         super(name, x, y);
     }
 
     @Override
-    public void interact(Player p) throws IOException {
+    public void interact(Player p) {
         p.p = Player.PlayerState.SAVING;
     }
 }
