@@ -15,22 +15,19 @@ public class FighterStat {
     List<Skill> skills;
 
     /**
-     * @param hp           fighter health
-     * @param mp           fighter energy
-     * @param atk          fighter attack
-     * @param def          fighter defence
-     * @param fighterLevel fighter level
-     * @param exp          fighter experience
-     * @param expPerLevel  max experience of each level
-     * @param skills       fight skill
+     * @param hp          fighter health
+     * @param mp          fighter energy
+     * @param atk         fighter attack
+     * @param def         fighter defence
+     * @param expPerLevel max experience of each level
+     * @param skills      fight skill
      */
-    public FighterStat(int hp, int mp, int atk, int def, int fighterLevel, int exp, int expPerLevel, List<Skill> skills) {
+    public FighterStat(int hp, int mp, int atk, int def, int expPerLevel, List<Skill> skills) {
         this.hp = hp;
         this.mp = mp;
         this.atk = atk;
         this.def = def;
-        this.fighterLevel = fighterLevel;
-        this.exp = exp;
+        this.fighterLevel = 1;
         this.expPerLevel = expPerLevel;
         this.skills = skills;
         this.maxMP = mp;

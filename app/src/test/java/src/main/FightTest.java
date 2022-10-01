@@ -25,7 +25,7 @@ class FightTest {
 
     }
 
-    FighterStat fighterStat = new FighterStat(10, 10, 10, 6, 0, 10, 15, skill);
+    FighterStat fighterStat = new FighterStat(10, 10, 10, 6, 15, skill);
 
     @Test
     void getSkillListNameTest() {
