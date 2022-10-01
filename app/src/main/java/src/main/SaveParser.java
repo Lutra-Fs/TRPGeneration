@@ -1,86 +1,128 @@
 package src.main;
-//import org.json.JSONException;
-//import org.json.JSONObject;
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.nio.channels.AsynchronousFileChannel;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SaveParser {
-    /**
-     * read file
-     * @author Xiangda Li
-     * @param path Where the documents are stored
-     * @return Return the Game object
-     */
-    public Game loadGameFromLocalFile(String path) {
-        Game game = null;
-        try {
-            File jsonFile = new File(path);
-            FileReader fileReader = new FileReader(jsonFile);
-            JsonReader reader = new JsonReader(fileReader);
-            game = new Gson().fromJson(reader, Game.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return game;
-    }
 
+public class SaveParser extends Interaction {
     /**
-     * archive
+     * Constructor for Interaction
      *
-     * @param s    Game object
-     * @param path Where the document is read
+     * @param p the player
+     * @author Bo ZHANG
      */
-    public void saveGameToLocalFile(Game s, String path) {
-        File jsonFile = new File(path);
-        try (FileWriter writer = new FileWriter(jsonFile)) {
-            new GsonBuilder().create().toJson(s, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
+    SaveParser(Player p) {
+        super(p);
+    }
+
+    static void createSaveFile(Game g) throws IOException {
+        // create path, by default the save will be in saves folder
+        Level l = g.level;
+        Player p = g.player;
+        String path = "saves";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        // make dir for the save, which is the time when the save is created
+        // like 2020-04-20-20-20-20
+        path += "/" + java.time.LocalDateTime.now();
+        file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        // create save file
+        String playerPath = path + "/player.json";
+        String levelPath = path + "/level.json";
+        file = new File(playerPath);
+        if (!file.createNewFile()) {
+            throw new IOException("Failed to create save file");
+        }
+
+        file = new File(levelPath);
+        if (!file.createNewFile()) {
+            throw new IOException("Cannot create level file");
+        }
+
+        // write player and level to file
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String playerJson = gson.toJson(p);
+        String levelJson = gson.toJson(l);
+        try (FileWriter writer = new FileWriter(playerPath)) {
+            writer.write(playerJson);
+        }
+        try (FileWriter writer = new FileWriter(levelPath)) {
+            writer.write(levelJson);
+        }
+        // create game file which contains the path of the original game file
+        String gamePath = path + "/game.json";
+        file = new File(gamePath);
+        if (!file.createNewFile()) {
+            throw new IOException("Cannot create game file");
+        }
+        try (FileWriter writer = new FileWriter(gamePath)) {
+            writer.write(l.gamePath);
         }
     }
 
-    /**
-     * read file
-     *
-     * @param path Where the documents are stored
-     * @return Return the List of Players
-     */
-    public List<Player> loadPlayersFromLocalFile(String path) {
-        List<Player> players= null;
-        final Type PLAYERS_LIST_TYPE = new TypeToken<List<Player>>() {
-        }.getType();
-        try {
-            File jsonFile = new File(path);
-            FileReader fileReader = new FileReader(jsonFile);
-            JsonReader reader = new JsonReader(fileReader);
-            players = new Gson().fromJson(reader,PLAYERS_LIST_TYPE);
-        } catch (Exception e) {
-            e.printStackTrace();
+    static Player loadPlayer(String path) throws IOException {
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(path)) {
+            return gson.fromJson(reader, Player.class);
         }
-        return players;
+    }
+
+    static Level loadLevel(String path) throws IOException {
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(path)) {
+            return gson.fromJson(reader, Level.class);
+        }
+
     }
 
     /**
-     * archive
+     * load a game from a save file
      *
-     * @param players    List of players
-     * @param path Where the document is read
+     * @param path path of the save file relative to 'saves' folder under the project root
+     * @return the game
+     * @throws IOException if the file cannot be read
      */
-    public void savePlayersToLocalFile(List<Player> players, String path) {
-        File jsonFile = new File(path);
-        try (FileWriter writer = new FileWriter(jsonFile)) {
-            new GsonBuilder().create().toJson(players, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    static void loadSave(String path, Player p, Level l) throws IOException {
+        path = "saves/" + path;
+        p = loadPlayer(path + "/player.json");
+        l = loadLevel(path + "/level.json");
+
     }
+
+    /**
+     * the method to load a game defination file
+     *
+     * @param gamePath relative path to 'Games' folder which is the root of the game
+     * @return the game object
+     */
+    static Game loadGame(String gamePath) throws IOException {
+        Gson gson = new Gson();
+        String path = "Games/" + gamePath;
+        Player p = loadPlayer(gamePath + "/player.json");
+        Level l = loadLevel(gamePath + "/levels/level1.json");
+        Game g = new Game(p, l);
+        l.gamePath = gamePath;
+        return g;
+    }
+
+    static void loadNextLevel(Level l) throws IOException {
+        Gson gson = new Gson();
+        String path = l.gamePath + "/levels/level" + (l.curLevel + 1) + ".json";
+        l = loadLevel(path);
+    }
+
+    @Override
+    void interrupt() {
+        player.p = Player.PlayerState.NORMAL;
+    }
+
 }

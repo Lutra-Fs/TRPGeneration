@@ -1,5 +1,7 @@
 package src.main;
 
+import java.io.IOException;
+
 public abstract class NPC {
     Location loc;
     final String name;
@@ -22,7 +24,7 @@ public abstract class NPC {
      *
      * @param p player
      */
-    void interact(Player p) {
+    void interact(Player p) throws IOException {
         p.p = Player.PlayerState.INTERACTING;
     }
 

@@ -19,17 +19,13 @@ public class Player {
         SAVING
     }
 
-
-    void save() {
-
-    }
-
     /**
      * interact with the npc that in the current location
      *
      * @author Bo ZHANG
      */
     void interact() {
+        // get npc from Level
 
     }
 

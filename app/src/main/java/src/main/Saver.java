@@ -1,0 +1,21 @@
+package src.main;
+
+import java.io.IOException;
+
+public class Saver extends NPC {
+    /**
+     * constructor for NPC
+     *
+     * @param name name of NPC
+     * @param x    x coordinate of NPC
+     * @param y    y coordinate of NPC
+     */
+    protected Saver(String name, int x, int y) {
+        super(name, x, y);
+    }
+
+    @Override
+    public void interact(Player p) throws IOException {
+        p.p = Player.PlayerState.SAVING;
+    }
+}
