@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TalkTest {
+class TalkTest {
 
     Talk talk;
     Player p;
@@ -16,12 +16,12 @@ public class TalkTest {
     List<Sentence> sentences = new ArrayList<>();
 
     private TalkTest() {
-        Sentence sentence1 = new Sentence("hello",sentences);
-        Sentence sentence2 = new Sentence("Bye",sentences);
+        Sentence sentence1 = new Sentence("hello", sentences);
+        Sentence sentence2 = new Sentence("Bye", sentences);
         sentences.add(sentence1);
         sentences.add(sentence2);
-        npc = new TalkNPC("bug",0,0,sentence1);
-        talk = new Talk(p,npc);
+        npc = new TalkNPC("bug", sentence1);
+        talk = new Talk(p, npc);
     }
     @Test
     void emptySentenceTest() {
