@@ -20,7 +20,7 @@ public class TalkTest {
         Sentence sentence2 = new Sentence("Bye",sentences);
         sentences.add(sentence1);
         sentences.add(sentence2);
-        npc = new TalkNPC("bug",1,1,sentence1);
+        npc = new TalkNPC("bug",0,0,sentence1);
         talk = new Talk(p,npc);
     }
     @Test
