@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class FightTest {
@@ -44,8 +43,7 @@ class FightTest {
     @Test
     void levelUpTest1() throws GameException {
         fighterStat.setExp(15);
-        fighterStat.levelUp();
-        assertEquals(1, fighterStat.getLevel(), "incorrect level");
+        assertThrows(GameException.class, () -> fighterStat.levelUp());
     }
 
     @Test
@@ -98,7 +96,7 @@ class FightTest {
     @Test
     void level0CalcSkillAtkTest() {
         Skill s = fighterStat.calcSkillATK(skill3);
-        assertEquals(10, s.getAtk(), "incorrect atk calculation");
+        assertEquals(20, s.getAtk(), "incorrect atk calculation");
     }
     @Test
     void level1CalcSkillAtkTest() {
