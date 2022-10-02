@@ -1,16 +1,20 @@
 package src.main;
 
+/**
+ * initialize and manage trade action in the game
+ *
+ * @author Bo ZHANG
+ */
 public class Trade extends Interaction {
     Trader npc;
 
     /**
-     * constructor
+     * constructor for trade
      *
      * @param p   player
      * @param npc npc
      * @author Bo ZHANG
      */
-
     Trade(Player p, Trader npc) {
         super(p);
         this.npc = npc;
@@ -60,6 +64,4 @@ public class Trade extends Interaction {
             throw new GameException("You have interrupted the trade");
         }
     }
-
-
 }

@@ -1,5 +1,10 @@
 package src.main;
 
+/**
+ * location of the player and the NPC
+ *
+ * @author Bo ZHANG
+ */
 public class Location {
     static int maxX = 0;
     static int maxY = 0;
@@ -62,7 +67,6 @@ public class Location {
     Location getUp() {
         return new Location(x, y - 1);
     }
-
 
     /**
      * get the location of the down of the current location

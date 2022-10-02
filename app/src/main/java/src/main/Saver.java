@@ -1,5 +1,10 @@
 package src.main;
 
+/**
+ * saving status of the game
+ *
+ * @author Bo ZHANG
+ */
 public class Saver extends NPC {
     /**
      * constructor for NPC

@@ -2,6 +2,11 @@ package src.main;
 
 import java.util.List;
 
+/**
+ * Player class is used to store the player's information
+ *
+ * @author Bo ZHANG
+ */
 public class Player {
     String name;
     PlayerState p = PlayerState.NORMAL;

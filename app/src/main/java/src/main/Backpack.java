@@ -3,11 +3,16 @@ package src.main;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Backpack class is used to list action of a player or NPC
+ *
+ * @author Bo ZHANG
+ */
 public class Backpack {
     List<Thing> things;
 
     /**
-     * constructor
+     * constructor for backpack
      *
      * @param things things in backpack
      * @author Bo ZHANG
@@ -81,7 +86,6 @@ public class Backpack {
      * @param t thing to add
      * @author Bo ZHANG
      */
-
     void add(Thing t) {
         if (things.contains(t)) {
             //amount + 1
@@ -166,14 +170,19 @@ public class Backpack {
     }
 
 
-    class Thing {
+    /**
+     * Thing class is used to show the price, name for a thing
+     *
+     * @author Bo ZHANG
+     */
+    static class Thing {
         final String name;
         final int price;
         final int recover;
         int amount = 1;
 
         /**
-         * constructor
+         * constructor for thing
          *
          * @param name    name of thing
          * @param price   price of thing

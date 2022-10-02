@@ -2,6 +2,12 @@ package src.main;
 
 import java.util.List;
 
+/**
+ * Sentence class is used to find and play the sentence of an NPC
+ *
+ * @author Jingqi DOU
+ * @author Bo ZHANG
+ */
 public class Sentence {
     String sentence;
     List<Sentence> nextSentences;

@@ -1,11 +1,19 @@
 package src.main;
 
+/**
+ * Enemy class is used to create enemy in the game
+ *
+ * @author Bo ZHANG
+ * @author Juhao Tao
+ */
 public class Enemy extends NPC {
 
     private final EnemyState level;
     FighterStat state;
 
     /**
+     * constructor for Enemy
+     *
      * @param name  NPC name
      * @param x     location x-coordinate
      * @param y     location y-coordinate
@@ -42,6 +50,8 @@ public class Enemy extends NPC {
         BOSS;
 
         /**
+         * get current state for the enemy
+         *
          * @param level level of enemy
          * @return EnemyState
          * @author Bo ZHANG

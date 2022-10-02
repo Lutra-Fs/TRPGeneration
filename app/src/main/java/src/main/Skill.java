@@ -1,5 +1,11 @@
 package src.main;
 
+/**
+ *
+ *
+ * @author Bo ZHANG
+ *
+ */
 public class Skill {
     String name;
     int atk;
@@ -7,6 +13,8 @@ public class Skill {
 
 
     /**
+     * constructor for Skill
+     *
      * @param name Skill name
      * @param atk  skill attack damage
      * @param mp   skill attack cost energy
@@ -19,6 +27,8 @@ public class Skill {
     }
 
     /**
+     * get the name of skill
+     *
      * @return skill name
      * @author Juhao Tao
      */
@@ -27,6 +37,8 @@ public class Skill {
     }
 
     /**
+     * get the atk of skill
+     *
      * @return skill damage
      * @author Juhao Tao
      */
@@ -35,6 +47,8 @@ public class Skill {
     }
 
     /**
+     * set the atk of skill
+     *
      * @param atk set Skill attack with new damage
      * @author Juhao Tao
      */
@@ -43,6 +57,8 @@ public class Skill {
     }
 
     /**
+     * get MP for skill
+     *
      * @return MP
      * @author Juhao Tao
      */

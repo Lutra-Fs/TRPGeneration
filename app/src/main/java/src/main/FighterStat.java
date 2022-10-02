@@ -2,6 +2,12 @@ package src.main;
 
 import java.util.List;
 
+/**
+ * FightStat class is used to record all the fight information
+ *
+ * @author Juhao Tao
+ * @author Bo ZHANG
+ */
 public class FighterStat {
     final int expPerLevel;
     int hp;
@@ -71,6 +77,8 @@ public class FighterStat {
     }
 
     /**
+     * get current HP
+     *
      * @return HP Health
      * @author Juhao Tao
      */
@@ -79,8 +87,8 @@ public class FighterStat {
     }
 
     /**
-     * Set hp to a new value
-     * This method make sure hp is not larger than maxHP or smaller than 0
+     * set hp to a new value
+     * this method make sure hp is not larger than maxHP or smaller than 0
      *
      * @param hp new HP
      * @author Bo ZHANG
@@ -98,6 +106,8 @@ public class FighterStat {
     }
 
     /**
+     * get current MP
+     *
      * @return MP energy
      * @author Juhao Tao
      */
@@ -106,8 +116,8 @@ public class FighterStat {
     }
 
     /**
-     * Set mp to a new value
-     * This method make sure mp is not larger than maxMP or smaller than 0
+     * set mp to a new value
+     * this method make sure mp is not larger than maxMP or smaller than 0
      *
      * @param mp new MP
      * @author Bo ZHANG
@@ -125,6 +135,8 @@ public class FighterStat {
     }
 
     /**
+     * get the max HP
+     *
      * @return MaxHP
      * @author Juhao Tao
      */
@@ -133,6 +145,8 @@ public class FighterStat {
     }
 
     /**
+     * get the max MP
+     *
      * @return MaxMP
      * @author Juhao Tao
      */
@@ -141,6 +155,8 @@ public class FighterStat {
     }
 
     /**
+     * get current game level
+     *
      * @return fighterLevel
      * @author Juhao Tao
      */
@@ -149,6 +165,8 @@ public class FighterStat {
     }
 
     /**
+     * get current def
+     *
      * @return defence
      * @author Bo ZHANG
      */
@@ -157,6 +175,8 @@ public class FighterStat {
     }
 
     /**
+     * get current exp
+     *
      * @return experience
      * @author Bo ZHANG
      */
@@ -165,6 +185,8 @@ public class FighterStat {
     }
 
     /**
+     * set up exp
+     *
      * @param exp fighter experience
      * @author Bo ZHANG
      */
@@ -173,6 +195,8 @@ public class FighterStat {
     }
 
     /**
+     * get the skill by index
+     *
      * @return chosen skill
      * @author Juhao Tao
      */
@@ -191,6 +215,8 @@ public class FighterStat {
     }
 
     /**
+     * get current exp in the current game level
+     *
      * @return experience of each level
      * @author Bo ZHANG
      */
@@ -222,7 +248,7 @@ public class FighterStat {
     }
 
     /**
-     * THis method is to calculate the skill attack according to fighter level
+     * calculate the skill attack according to fighter level
      *
      * @param s skill chose by user
      * @return skill with new damage value
@@ -235,10 +261,9 @@ public class FighterStat {
         return s;
     }
 
-
     /**
-     * This method is to determine if fighter is valid to level up
-     * Increase attribute when fighter level up
+     * determine if fighter is valid to level up
+     * increase attribute when fighter level up
      *
      * @throws GameException if exp not reach each level exp, throw exception else level add 1
      * @author Bo ZHANG
@@ -260,8 +285,8 @@ public class FighterStat {
     }
 
     /**
-     * This method is used to calculate the actual damage of the attack considering the defence of the defender.
-     * The attack order is that attacker find skills, then calculate the damage of the skill,
+     * calculate the actual damage of the attack considering the defence of the defender.
+     * the attack order is that attacker find skills, then calculate the damage of the skill,
      * then defender calculate the actual damage.
      *
      * @param s the skill which has calculated damage by the attacker's atk
@@ -279,6 +304,8 @@ public class FighterStat {
     }
 
     /**
+     * if fighter is dead or not
+     *
      * @return if fighter is dead or not
      * @author Juhao Tao
      */
@@ -288,6 +315,8 @@ public class FighterStat {
     }
 
     /**
+     * get the skill by putting the name of the skill
+     *
      * @param name SKill name
      * @return Skill
      * @throws GameException if skill invalid, throw exception
@@ -301,6 +330,4 @@ public class FighterStat {
         }
         throw new GameException();
     }
-
-
 }

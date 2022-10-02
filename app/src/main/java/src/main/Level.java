@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * level class for the game
+ *
+ * @author Bo ZHANG
+ * @author Jingqi DOU
+ */
 public class Level {
     static String gamePath;
     final int curLevel;
@@ -130,5 +136,4 @@ public class Level {
         }
         return surronding;
     }
-
 }

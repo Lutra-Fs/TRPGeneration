@@ -1,5 +1,11 @@
 package src.main;
 
+/**
+ * NPC class is used to initialize the NPC
+ *
+ * @author Bo ZHANG
+ */
+
 public abstract class NPC {
     final String name;
     Location loc;

@@ -1,10 +1,16 @@
 package src.main;
 
+/**
+ * initialize the saying for NPC
+ *
+ * @author Jingqi DOU
+ * @author Bo ZHANG
+ */
 public class TalkNPC extends NPC {
     final Sentence firstSentence;
 
     /**
-     * Constructor for TalkNPC
+     * constructor for TalkNPC
      *
      * @param name          the name of the npc
      * @param x             the x coordinate of the npc

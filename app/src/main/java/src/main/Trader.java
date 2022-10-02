@@ -2,6 +2,11 @@ package src.main;
 
 import java.util.List;
 
+/**
+ * handle the trade event
+ *
+ * @author Bo ZHANG
+ */
 public class Trader extends NPC {
     Backpack backpack;
 
@@ -10,9 +15,8 @@ public class Trader extends NPC {
         backpack = b;
     }
 
-
     /**
-     * Calling this method will change the player's state to trading
+     * calling this method will change the player's state to trading
      *
      * @param p the player
      * @author Bo ZHANG

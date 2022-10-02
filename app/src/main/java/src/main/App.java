@@ -16,7 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
+/**
+ * The game GUI by use lanterna
+ *
+ * @author Jingqi DOU
+ * @author Bo ZHANG
+ */
 public class App {
     static BasicWindow window = new BasicWindow();
     static MultiWindowTextGUI gui;
@@ -152,11 +157,18 @@ public class App {
             curGame.setLayoutManager(new GridLayout(3));
             levelToPanel(curGame, game);
             // when the game starts, display the main menu
-            window.setComponent(curGame); // change to mainMenuPanel to display main menu, Remember!!!
+            window.setComponent(mainMenuPanel); // change to mainMenuPanel to display main menu, Remember!!!
             gui.addWindowAndWait(window);
         }
     }
 
+    /**
+     *  convert game to panel
+     *
+     * @param mainPanel
+     * @param game
+     * @author Bo ZHANG
+     */
     static void gameToPanel(Panel mainPanel, Game game) {
         // remove all components at the beginning
         mainPanel.removeAllComponents();
@@ -171,6 +183,13 @@ public class App {
         window.setComponent(mainPanel);
     }
 
+    /**
+     * convert interact to panel
+     *
+     * @param mainPanel
+     * @param game
+     * @author Bo ZHANG
+     */
     private static void interactToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         String interactText = """
@@ -187,6 +206,13 @@ public class App {
                 .showDialog(gui);
     }
 
+    /**
+     * convert level to panel
+     *
+     * @param mainPanel
+     * @param game
+     * @author Bo ZHANG
+     */
     static void levelToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new GridLayout(3));
         Panel leftPanel = new Panel();
@@ -348,6 +374,13 @@ public class App {
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * convert talk to panel
+     *
+     * @param mainPanel
+     * @param game
+     * @author Bo ZHANG
+     */
     static void talkToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new GridLayout(2));
         Talk talk = (Talk) game.interaction;
@@ -405,6 +438,12 @@ public class App {
 
     }
 
+    /**
+     * convert trade to panel
+     *
+     * @param mainPanel
+     * @param game
+     */
     static void tradeToPanel(Panel mainPanel, Game game) {
         Trade trade = (Trade) game.interaction;
         Panel leftPanel = new Panel();
@@ -455,11 +494,23 @@ public class App {
 
     }
 
+    /**
+     * convert fight to panel
+     *
+     * @param mainPanel
+     * @param game
+     * @author Bo ZHANG
+     */
     static void fightToPanel(Panel mainPanel, Game game) {
         Fight fight = (Fight) game.interaction;
-
     }
 
+    /**
+     * convert save to panel
+     *
+     * @param mainPanel
+     * @param game
+     */
     static void saveToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         SaveParser saveParser = (SaveParser) game.interaction;

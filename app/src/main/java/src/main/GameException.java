@@ -1,5 +1,10 @@
 package src.main;
 
+/**
+ * handle the exception of the game
+ *
+ * @author Bo ZHANG
+ */
 public class GameException extends Exception {
     public GameException(String message) {
         super(message);

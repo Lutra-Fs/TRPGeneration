@@ -1,5 +1,10 @@
 package src.main;
 
+/**
+ * link front-end and back-end of the game
+ *
+ * @author Bo ZHANG
+ */
 public abstract class Interaction {
     Player player;
 

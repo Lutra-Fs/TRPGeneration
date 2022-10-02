@@ -1,11 +1,18 @@
 package src.main;
 
+
+/**
+ * initialize and manage talks between player and NPC in the game
+ *
+ * @author Jingqi DOU
+ * @author Bo ZHANG
+ */
 public class Talk extends Interaction {
     TalkNPC npc;
     Sentence curSentence;
 
     /**
-     * Constructor for Talk
+     * constructor for Talk
      *
      * @param p   the player
      * @param npc the npc
@@ -46,6 +53,12 @@ public class Talk extends Interaction {
         }
     }
 
+    /**
+     * read next sentence
+     *
+     * @throws GameException for the interaction to handle
+     * @author Bo ZHANG
+     */
     void nextSentence(String name) throws GameException {
         for (Sentence s : curSentence.nextSentences) {
             if (s.sentence.equals(name)) {

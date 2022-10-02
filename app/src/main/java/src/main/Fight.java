@@ -2,6 +2,12 @@ package src.main;
 
 import java.util.List;
 
+/**
+ * fight class
+ *
+ * @author Juhao Tao
+ * @author Bo ZHANG
+ */
 public class Fight extends Interaction {
 
     Enemy npc;
@@ -10,7 +16,7 @@ public class Fight extends Interaction {
     boolean isPlayerTurn;
 
     /**
-     * Constructor for Fight
+     * constructor for Fight
      *
      * @param player current player
      * @param npc    the npc that player is interacting with
@@ -26,6 +32,8 @@ public class Fight extends Interaction {
     }
 
     /**
+     * get player's fight skill
+     *
      * @return player skills
      * @author Juhao Tao
      */
@@ -34,6 +42,8 @@ public class Fight extends Interaction {
     }
 
     /**
+     * get player backpack
+     *
      * @return player backpack
      * @author Bo ZHANG
      */

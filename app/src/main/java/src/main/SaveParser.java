@@ -1,12 +1,16 @@
 package src.main;
 
-
 import com.google.gson.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
 
-
+/**
+ * parse the save file
+ *
+ * @author Bo ZHANG
+ * @author Xiangda Li
+ */
 public class SaveParser extends Interaction {
     /**
      * Constructor for Interaction
@@ -28,7 +32,6 @@ public class SaveParser extends Interaction {
      * @author Bo ZHANG
      * @author Xiangda Li
      */
-
     static String createSaveFile(Game g) throws IOException {
         // create path, by default the save will be in saves folder
         Level l = g.level;
