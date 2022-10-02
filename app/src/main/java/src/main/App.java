@@ -163,7 +163,7 @@ public class App {
     }
 
     /**
-     *  convert game to panel
+     * convert game to panel
      *
      * @param mainPanel
      * @param game
@@ -503,6 +503,91 @@ public class App {
      */
     static void fightToPanel(Panel mainPanel, Game game) {
         Fight fight = (Fight) game.interaction;
+        mainPanel.setLayoutManager(new GridLayout(3));
+        Panel leftPanel = new Panel();
+        mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Player's status")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        leftPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+        if (fight.isPlayerTurn) {
+            leftPanel.addComponent(new Label("Your Round"));
+        }
+        // show player status
+        Panel playerStatus = new Panel();
+        playerStatus.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+        playerStatus.addComponent(new Label("Player's HP: " + fight.playerStat.getHp() + "/" + fight.playerStat.getMaxHP()));
+        playerStatus.addComponent(new Label("Player's MP: " + fight.playerStat.getMp() + "/" + fight.playerStat.getMaxMP())))
+        playerStatus.addComponent(new Label("Player's Attack: " + fight.playerStat.getAttack()));
+        playerStatus.addComponent(new Label("Player's Defense: " + fight.playerStat.getDefense()));
+        leftPanel.addComponent(playerStatus.withBorder(Borders.singleLine("Player: " + fight.player.name)));
+
+        Table<String> skillTable = new Table<>("Skill", "MP", "Damage");
+        for (Skill skill : fight.playerStat.skills) {
+            skillTable.getTableModel().addRow(skill.name, skill.mp + "", skill.atk + "");
+        }
+        skillTable.setSelectAction(() -> {
+            String skillName = skillTable.getTableModel().getRow(skillTable.getSelectedRow()).get(0);
+            try {
+                fight.useSkill(skillName);
+            } catch (GameException.PlayerDeadException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Fight End")
+                        .setText("You are dead, game over, press OK to exit")
+                        .addButton(MessageDialogButton.Abort)
+                        .build()
+                        .showDialog(gui);
+                System.exit(1);
+            } catch (GameException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Error")
+                        .setText(e.getMessage())
+                        .addButton(MessageDialogButton.OK)
+                        .build()
+                        .showDialog(gui);
+            }
+            try {
+                fight.useSkill();
+            } catch (GameException.PlayerDeadException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Fight End")
+                        .setText("You are dead, game over, press OK to exit")
+                        .addButton(MessageDialogButton.Abort)
+                        .build()
+                        .showDialog(gui);
+                System.exit(1);
+            } catch (GameException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Error")
+                        .setText(e.getMessage())
+                        .addButton(MessageDialogButton.OK)
+                        .build()
+                        .showDialog(gui);
+            }
+            gameToPanel(mainPanel, game);
+        });
+
+
+        Panel midPanel = new Panel();
+        mainPanel.addComponent(midPanel.withBorder(Borders.singleLine("Fight Progress")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        midPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+
+
+        Panel rightPanel = new Panel();
+        mainPanel.addComponent(rightPanel.withBorder(Borders.singleLine("NPC status")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        rightPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+        if (!fight.isPlayerTurn) {
+            rightPanel.addComponent(new Label("NPC Round"));
+        }
+        Panel enemyStatus = new Panel();
+        enemyStatus.setLayoutManager(new LinearLayout(Direction.VERTICAL));
+        enemyStatus.addComponent(new Label("Player's HP: " + fight.enemyStat.getHp() + "/" + fight.enemyStat.getMaxHP()));
+        enemyStatus.addComponent(new Label("Player's MP: " + fight.enemyStat.getMp() + "/" + fight.enemyStat.getMaxMP())))
+        enemyStatus.addComponent(new Label("Player's Attack: " + fight.enemyStat.getAttack()));
+        enemyStatus.addComponent(new Label("Player's Defense: " + fight.enemyStat.getDefense()));
+        leftPanel.addComponent(enemyStatus.withBorder(Borders.singleLine("Enemy: " + fight.npc.name)));
+
+        Table<String> enemySkillTable = new Table<>("Skill", "MP", "Damage");
+        for (Skill skill : fight.enemyStat.skills) {
+            skillTable.getTableModel().addRow(skill.name, skill.mp + "", skill.atk + "");
+        }
     }
 
     /**

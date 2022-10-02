@@ -1,6 +1,8 @@
 package src.main;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * fight class
@@ -14,6 +16,8 @@ public class Fight extends Interaction {
     FighterStat playerStat;
     FighterStat enemyStat;
     boolean isPlayerTurn;
+
+    List<String> fightLog = new ArrayList<>();
 
     /**
      * constructor for Fight
@@ -96,6 +100,10 @@ public class Fight extends Interaction {
         Skill sAi = s.calcSkillATK(s.getSkillAI());
         FighterStat e = isPlayerTurn ? enemyStat : playerStat;
         e.beAttacked(sAi);
+        String username = isPlayerTurn ? player.getName() : npc.getName();
+        String skillName = sAi.getName();
+        String enemyName = isPlayerTurn ? npc.getName() : player.getName();
+        fightLog.add(s.getName() + " used " + sAi.getName() + " on " + e.getName());
         if (isEnd()) {
             interrupt();
         }

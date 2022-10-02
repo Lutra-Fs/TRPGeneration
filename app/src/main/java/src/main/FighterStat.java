@@ -346,6 +346,15 @@ public class FighterStat {
         this.hp = maxHP;
         this.mp = maxMP;
         this.skills = new ArrayList<>();
-        this.skills.add(new Skill("Base Attack", 10,5));
+        this.skills.add(new Skill("Base Attack", 10, 5));
     }
+
+    public int getAttack() {
+        return atk;
+    }
+
+    public int getDefense() {
+        return def;
+    }
+    
 }

@@ -48,4 +48,7 @@ public abstract class NPC {
         p.p = Player.PlayerState.NORMAL;
     }
 
+    public String getName() {
+        return name;
+    }
 }

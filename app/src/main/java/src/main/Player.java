@@ -63,6 +63,10 @@ public class Player {
         return b.getThings();
     }
 
+    public String getName() {
+        return name;
+    }
+
     enum PlayerState {
         NORMAL,
         FIGHTING,
