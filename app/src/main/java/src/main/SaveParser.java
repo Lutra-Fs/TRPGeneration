@@ -23,12 +23,13 @@ public class SaveParser extends Interaction {
      * create a new save file from the current game
      *
      * @param g current game to save
+     * @return the folder path of the save folder
      * @throws IOException if the file cannot be created
      * @author Bo ZHANG
      * @author Xiangda Li
      */
 
-    static void createSaveFile(Game g) throws IOException {
+    static String createSaveFile(Game g) throws IOException {
         // create path, by default the save will be in saves folder
         Level l = g.level;
         Player p = g.player;
@@ -76,6 +77,7 @@ public class SaveParser extends Interaction {
         try (FileWriter writer = new FileWriter(gamePath)) {
             writer.write(l.gamePath);
         }
+        return path;
     }
 
     /**

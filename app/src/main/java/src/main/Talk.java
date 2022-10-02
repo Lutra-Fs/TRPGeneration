@@ -24,7 +24,7 @@ public class Talk extends Interaction {
      * @author Jingqi DOU
      */
     void nextSentence() {
-        if (curSentence.nextSentences.size() == 0) {
+        if (curSentence.nextSentences.isEmpty()) {
             interrupt();
         } else {
             curSentence = curSentence.nextSentences.get(0);
@@ -44,6 +44,16 @@ public class Talk extends Interaction {
         } else {
             throw new GameException("No such sentence");
         }
+    }
+
+    void nextSentence(String name) throws GameException {
+        for (Sentence s : curSentence.nextSentences) {
+            if (s.sentence.equals(name)) {
+                curSentence = s;
+                return;
+            }
+        }
+        throw new GameException("No such sentence");
     }
 
     @Override

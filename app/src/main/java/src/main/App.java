@@ -12,6 +12,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -43,11 +44,9 @@ public class App {
             mainMenuPanel.addComponent(new Label("Main Menu"), GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.CENTER, true, false, 1, 1));
             mainMenuPanel.addComponent(new Label("   "));
             mainMenuPanel.addComponent(new Button("New Game", () -> {
-                mainMenuPanel.removeAllComponents();
                 window.setComponent(startNewGame);
             }));
             mainMenuPanel.addComponent(new Button("Resume Game", () -> {
-                mainMenuPanel.removeAllComponents();
                 window.setComponent(resumeGame);
             }));
             mainMenuPanel.addComponent(new Button("Exit Game", () -> {
@@ -57,24 +56,26 @@ public class App {
                     throw new RuntimeException(e);
                 }
             }));
+            String aboutText = """
+                    TRPGeneration
+                    a simple RPG game engine.
+                    Copyright (C) 2022  Bo ZHANG; Jingqi DOU; Juhao TAO; Xiangda LI; Ge ZHAN
+                    This program is free software: you can redistribute it and/or modify
+                    it under the terms of the GNU General Public License as published by
+                    the Free Software Foundation, either version 3 of the License, or
+                    (at your option) any later version.
+
+                    This program is distributed in the hope that it will be useful,
+                    but WITHOUT ANY WARRANTY; without even the implied warranty of
+                    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                    GNU General Public License for more details.
+
+                    You should have received a copy of the GNU General Public License
+                    along with this program.  If not, see <https://www.gnu.org/licenses/>.""";
             mainMenuPanel.addComponent(new Button("About", () ->
                     new MessageDialogBuilder()
                             .setTitle("About")
-                            .setText("TRPGeneration\n" +
-                                    "a simple RPG game engine.\n" +
-                                    "Copyright (C) 2022  Bo ZHANG; Jingqi DOU; Juhao TAO; Xiangda LI; Ge ZHAN\n" +
-                                    "This program is free software: you can redistribute it and/or modify\n" +
-                                    "it under the terms of the GNU General Public License as published by\n" +
-                                    "the Free Software Foundation, either version 3 of the License, or\n" +
-                                    "(at your option) any later version.\n" +
-                                    "\n" +
-                                    "This program is distributed in the hope that it will be useful,\n" +
-                                    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                                    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                                    "GNU General Public License for more details.\n" +
-                                    "\n" +
-                                    "You should have received a copy of the GNU General Public License\n" +
-                                    "along with this program.  If not, see <https://www.gnu.org/licenses/>.")
+                            .setText(aboutText)
                             .addButton(MessageDialogButton.Close)
                             .build()
                             .showDialog(gui)
@@ -112,13 +113,9 @@ public class App {
 
             startNewGame.addComponent(new Label("   "));
 
-            // Exit Game
-            new Button("Exit Game:(", () -> {
-                try {
-                    terminal.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            // Back to Main Menu
+            new Button("Go Back", () -> {
+                window.setComponent(mainMenuPanel);
             }).addTo(startNewGame);
 
 //------------------Resume Game Menu------------------//
@@ -142,12 +139,8 @@ public class App {
             }).addTo(resumeGame);
 
             // Exit Game
-            new Button("Exit Game:(", () -> {
-                try {
-                    terminal.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            new Button("Go Back", () -> {
+                window.setComponent(mainMenuPanel);
             }).addTo(resumeGame);
 
             resumeGame.addComponent(new Label("   "));
@@ -158,7 +151,7 @@ public class App {
             curGame.setLayoutManager(new GridLayout(3));
             levelToPanel(curGame, game);
             // when the game starts, display the main menu
-            window.setComponent(mainMenuPanel); // change to mainMenuPanel to display main menu, Remember!!!
+            window.setComponent(curGame); // change to mainMenuPanel to display main menu, Remember!!!
             gui.addWindowAndWait(window);
         }
     }
@@ -309,18 +302,21 @@ public class App {
         Panel itemPanel = new Panel();
         rightPanel.addComponent(itemPanel.withBorder(Borders.singleLine("Items")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
         Table<String> itemTable = new Table<>("Item", "Amount", "Recover");
-        //Backpack.Thing[] itemString = game.player.backpack.getThings();
+        //Backpack.Thing[] itemString = game.player.b.getThings();
         Backpack backpack = new Backpack();
         backpack.add("Potion", 5, 10);
+        backpack.add("Meat", 5, 10);
         Backpack.Thing[] itemString = backpack.getThings().toArray(new Backpack.Thing[0]);
         for (Backpack.Thing thing : itemString) {
             itemTable.getTableModel().addRow(thing.name, thing.amount + "", thing.recover + "");
         }
-        table.setSelectAction(() -> {
-            int row = table.getSelectedRow();
+        itemTable.setSelectAction(() -> {
+            int row = itemTable.getSelectedRow();
             Backpack.Thing thing = itemString[row];
             try {
-                game.player.b.use(thing, game.player.fightStat);
+                System.out.println(thing.name);
+                game.player.use(thing, game.player.fightStat);
+                table.getTableModel().setCell(1, row, thing.amount + "");
             } catch (GameException e) {
                 new MessageDialogBuilder()
                         .setTitle("Error")
@@ -333,7 +329,60 @@ public class App {
         itemPanel.addComponent(itemTable);
     }
 
+    @SuppressWarnings("unchecked")
     static void talkToPanel(Panel mainPanel, Game game) {
+        Talk talk = (Talk) game.interaction;
+        // check if the panel is not talk panel
+        Table<String> table;
+        if (mainPanel.getChildrenList().isEmpty()) {
+            // create table
+            table = new Table<>("Conversation");
+            mainPanel.addComponent(table);
+        } else {
+            // grab table from mainPanel
+            if (mainPanel.getChildrenList().get(0) instanceof Table) {
+                table = (Table<String>) mainPanel.getChildrenList().get(0);
+            } else {
+                mainPanel.removeAllComponents();
+                table = new Table<>("Conversation");
+                mainPanel.addComponent(table);
+            }
+            // remove ActionListBox in the panel
+            ActionListBox actionListBox = (ActionListBox) mainPanel.getChildrenList().get(1);
+            mainPanel.removeComponent(actionListBox);
+        }
+        mainPanel.addComponent(new Label("Talk to " + talk.npc.name));
+        // no scroll support in lanterna, limit table size to 7
+        // check table row size
+        while (table.getTableModel().getRowCount() > 7) {
+            table.getTableModel().removeRow(0);
+        }
+        table.getTableModel().addRow(talk.curSentence.sentence);
+
+        ActionListBox actionListBox = new ActionListBox();
+        mainPanel.addComponent(actionListBox);
+        for (Sentence sentence : talk.curSentence.nextSentences) {
+            actionListBox.addItem(sentence.sentence, () -> {
+                table.getTableModel().addRow(sentence.sentence);
+                try {
+                    talk.nextSentence(sentence.sentence);
+                } catch (GameException e) {
+                    talk.interrupt();
+                    new MessageDialogBuilder()
+                            .setTitle("Error")
+                            .setText(e.getMessage())
+                            .addButton(MessageDialogButton.OK)
+                            .build()
+                            .showDialog(gui);
+                }
+                talk.nextSentence();
+                if (talk.curSentence.nextSentences.isEmpty()) {
+                    gameToPanel(mainPanel, game);
+                } else { // if there are more sentences keep the talk panel
+                    talkToPanel(mainPanel, game);
+                }
+            });
+        }
 
     }
 
@@ -346,6 +395,26 @@ public class App {
     }
 
     static void saveToPanel(Panel mainPanel, Game game) {
-
+        SaveParser saveParser = (SaveParser) game.interaction;
+        mainPanel.addComponent(new Label("Saving..."));
+        String saveName = "path placeholder";
+        try {
+            saveName = SaveParser.createSaveFile(game);
+        } catch (IOException e) {
+            new MessageDialogBuilder()
+                    .setTitle("Error")
+                    .setText(e.getMessage())
+                    .addButton(MessageDialogButton.OK)
+                    .build()
+                    .showDialog(gui);
+        }
+        new MessageDialogBuilder()
+                .setTitle("Save")
+                .setText("Save successfully! at " + new File(saveName).getAbsolutePath())
+                .addButton(MessageDialogButton.OK)
+                .build()
+                .showDialog(gui);
+        saveParser.interrupt();
+        gameToPanel(mainPanel, game);
     }
 }
