@@ -30,7 +30,6 @@ class FightTest {
     @Test
     void getSkillListNameTest() {
         assertEquals("base_attack", fighterStat.getSkills().get(0).getName(), "Incorrect skill name ");
-
     }
     @Test
     void getSkillListAtkTest() {
