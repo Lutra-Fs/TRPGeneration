@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * used to list action of a player or NPC
+ * use to store things in backpack
  *
  * @author Bo ZHANG
  */
