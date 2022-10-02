@@ -24,7 +24,9 @@ public abstract class NPC {
     }
 
     protected NPC (String name){
+        Location.setMax(1, 1);
         this.name = name;
+        loc = new Location(0, 0);
     }
 
     /**

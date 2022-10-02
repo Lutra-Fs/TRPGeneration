@@ -24,8 +24,7 @@ public class TalkNPC extends NPC {
     }
 
     TalkNPC(String name, Sentence firstSentence) {
-        Location.setMax(1, 1);
-        super(name, 0, 0);
+        super(name);
         this.firstSentence = firstSentence;
     }
 
