@@ -99,11 +99,11 @@ public class Fight extends Interaction {
         FighterStat s = isPlayerTurn ? playerStat : enemyStat;
         Skill sAi = s.calcSkillATK(s.getSkillAI());
         FighterStat e = isPlayerTurn ? enemyStat : playerStat;
-        e.beAttacked(sAi);
+        int actualDamage = e.beAttacked(sAi);
         String username = isPlayerTurn ? player.getName() : npc.getName();
         String skillName = sAi.getName();
         String enemyName = isPlayerTurn ? npc.getName() : player.getName();
-        fightLog.add(s.getName() + " used " + sAi.getName() + " on " + e.getName());
+        fightLog.add(username + " used " + skillName + " on " + enemyName + ", which caused " + actualDamage + " damage.");
         if (isEnd()) {
             interrupt();
         }
@@ -146,7 +146,12 @@ public class Fight extends Interaction {
         }
         Skill sParse = s1.calcSkillATK(s);
         s1.setMp(s1.getMp() - sParse.getMp());
-        e.beAttacked(sParse);
+        int actualDamage = e.beAttacked(sParse);
+        String username = isPlayerTurn ? player.getName() : npc.getName();
+        String skillName = sParse.getName();
+        String enemyName = isPlayerTurn ? npc.getName() : player.getName();
+        fightLog.add(username + " used " + skillName + " on " + enemyName + ", which caused " + actualDamage + " damage.");
+
         // check if the fight can end
         if (isEnd()) {
             interrupt();

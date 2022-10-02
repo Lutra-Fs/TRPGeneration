@@ -291,17 +291,19 @@ public class FighterStat {
      * then defender calculate the actual damage.
      *
      * @param s the skill which has calculated damage by the attacker's atk
+     * @return actual damage
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    void beAttacked(Skill s) {
+    int beAttacked(Skill s) {
         // if attack damage is larger than defence, fighter received damage
         s.setAtk(s.getAtk() - (int) (getDef() * 0.25)); // consider defence
+        int actualDamage = s.getAtk();
         if (s.getAtk() < getDef()) {
-            this.hp = getHp() - (int) (s.getAtk() * 0.1); // if the damage is less than defence, penalty will be applied
-        } else {
-            this.hp = getHp() - s.getAtk();
+            actualDamage = (int) (actualDamage * 0.1);
         }
+        addHP(-actualDamage);
+        return actualDamage;
     }
 
     /**
@@ -335,7 +337,7 @@ public class FighterStat {
     /**
      * initialize the fight statistic
      */
-    FighterStat(){
+    FighterStat() {
         this.level = 1;
         this.maxHP = 100;
         this.maxMP = 50;
@@ -356,5 +358,5 @@ public class FighterStat {
     public int getDefense() {
         return def;
     }
-    
+
 }

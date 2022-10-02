@@ -514,7 +514,7 @@ public class App {
         Panel playerStatus = new Panel();
         playerStatus.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         playerStatus.addComponent(new Label("Player's HP: " + fight.playerStat.getHp() + "/" + fight.playerStat.getMaxHP()));
-        playerStatus.addComponent(new Label("Player's MP: " + fight.playerStat.getMp() + "/" + fight.playerStat.getMaxMP())))
+        playerStatus.addComponent(new Label("Player's MP: " + fight.playerStat.getMp() + "/" + fight.playerStat.getMaxMP()));
         playerStatus.addComponent(new Label("Player's Attack: " + fight.playerStat.getAttack()));
         playerStatus.addComponent(new Label("Player's Defense: " + fight.playerStat.getDefense()));
         leftPanel.addComponent(playerStatus.withBorder(Borders.singleLine("Player: " + fight.player.name)));
@@ -568,7 +568,10 @@ public class App {
         Panel midPanel = new Panel();
         mainPanel.addComponent(midPanel.withBorder(Borders.singleLine("Fight Progress")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
         midPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
-
+        // always show the last 15 lines in fight.fightLog
+        for (int i = Math.max(0, fight.fightLog.size() - 15); i < fight.fightLog.size(); i++) {
+            midPanel.addComponent(new Label(fight.fightLog.get(i)));
+        }
 
         Panel rightPanel = new Panel();
         mainPanel.addComponent(rightPanel.withBorder(Borders.singleLine("NPC status")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
@@ -579,7 +582,7 @@ public class App {
         Panel enemyStatus = new Panel();
         enemyStatus.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         enemyStatus.addComponent(new Label("Player's HP: " + fight.enemyStat.getHp() + "/" + fight.enemyStat.getMaxHP()));
-        enemyStatus.addComponent(new Label("Player's MP: " + fight.enemyStat.getMp() + "/" + fight.enemyStat.getMaxMP())))
+        enemyStatus.addComponent(new Label("Player's MP: " + fight.enemyStat.getMp() + "/" + fight.enemyStat.getMaxMP()));
         enemyStatus.addComponent(new Label("Player's Attack: " + fight.enemyStat.getAttack()));
         enemyStatus.addComponent(new Label("Player's Defense: " + fight.enemyStat.getDefense()));
         leftPanel.addComponent(enemyStatus.withBorder(Borders.singleLine("Enemy: " + fight.npc.name)));
