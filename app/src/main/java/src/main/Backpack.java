@@ -53,11 +53,26 @@ public class Backpack {
     Thing sell(String name) throws GameException {
         for (Thing t : things) {
             if (t.name.equals(name)) {
-                things.remove(t);
+                t.amount--;
+                if (t.amount == 0) {
+                    things.remove(t);
+                }
                 return t;
             }
         }
         throw new GameException("No such thing");
+    }
+
+    Thing sell(Thing t) throws GameException {
+        if (things.contains(t)) {
+            t.amount--;
+            if (t.amount == 0) {
+                things.remove(t);
+            }
+            return t;
+        } else {
+            throw new GameException("No such thing");
+        }
     }
 
     /**

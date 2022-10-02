@@ -55,6 +55,10 @@ public class Trader extends NPC {
         }
     }
 
+    Backpack.Thing sell(Backpack.Thing t) throws GameException {
+        return backpack.sell(t);
+    }
+
     /**
      * get the number of things in the trader's backpack
      *

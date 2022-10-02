@@ -14,6 +14,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 public class App {
@@ -171,6 +172,7 @@ public class App {
     }
 
     private static void interactToPanel(Panel mainPanel, Game game) {
+        mainPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         String interactText = """
                 You are not supposed to see this.
                 If you see this, please contact the developer.
@@ -318,17 +320,17 @@ public class App {
         Panel itemPanel = new Panel();
         rightPanel.addComponent(itemPanel.withBorder(Borders.singleLine("Items")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
         Table<String> itemTable = new Table<>("Item", "Amount", "Recover");
-        //Backpack.Thing[] itemString = game.player.b.getThings();
+        //List<Backpack.Thing> itemList = game.player.backpack.getThings();
         Backpack backpack = new Backpack();
         backpack.add("Potion", 5, 10);
         backpack.add("Meat", 5, 10);
-        Backpack.Thing[] itemString = backpack.getThings().toArray(new Backpack.Thing[0]);
-        for (Backpack.Thing thing : itemString) {
+        List<Backpack.Thing> itemList = backpack.getThings();
+        for (Backpack.Thing thing : itemList) {
             itemTable.getTableModel().addRow(thing.name, thing.amount + "", thing.recover + "");
         }
         itemTable.setSelectAction(() -> {
             int row = itemTable.getSelectedRow();
-            Backpack.Thing thing = itemString[row];
+            Backpack.Thing thing = itemList.get(row);
             try {
                 System.out.println(thing.name);
                 game.player.use(thing, game.player.fightStat);
@@ -347,6 +349,7 @@ public class App {
 
     @SuppressWarnings("unchecked")
     static void talkToPanel(Panel mainPanel, Game game) {
+        mainPanel.setLayoutManager(new GridLayout(2));
         Talk talk = (Talk) game.interaction;
         // check if the panel is not talk panel
         Table<String> table;
@@ -361,7 +364,7 @@ public class App {
             } else {
                 mainPanel.removeAllComponents();
                 table = new Table<>("Conversation");
-                mainPanel.addComponent(table);
+                mainPanel.addComponent(table, GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
             }
             // remove ActionListBox in the panel
             ActionListBox actionListBox = (ActionListBox) mainPanel.getChildrenList().get(1);
@@ -376,7 +379,7 @@ public class App {
         table.getTableModel().addRow(talk.curSentence.sentence);
 
         ActionListBox actionListBox = new ActionListBox();
-        mainPanel.addComponent(actionListBox);
+        mainPanel.addComponent(actionListBox, GridLayout.createLayoutData(GridLayout.Alignment.END GridLayout.Alignment.BEGINNING, true, false, 1, 1));
         for (Sentence sentence : talk.curSentence.nextSentences) {
             actionListBox.addItem(sentence.sentence, () -> {
                 table.getTableModel().addRow(sentence.sentence);
@@ -403,14 +406,62 @@ public class App {
     }
 
     static void tradeToPanel(Panel mainPanel, Game game) {
-        
+        Trade trade = (Trade) game.interaction;
+        Panel leftPanel = new Panel();
+        Panel rightPanel = new Panel();
+        mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Player's Backpack")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        mainPanel.addComponent(rightPanel.withBorder(Borders.singleLine("NPC's Backpack")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        rightPanel.addComponent(new Label("Trading with " + trade.npc.name));
+        Table<String> playerTable = new Table<>("Item", "Amount", "Recover");
+        List<Backpack.Thing> playerString = trade.player.b.getThings();
+        for (Backpack.Thing thing : playerString) {
+            playerTable.getTableModel().addRow(thing.name, thing.amount + "", thing.recover + "");
+        }
+        leftPanel.addComponent(playerTable);
+        Table<String> npcTable = new Table<>("Item", "Amount", "Recover", "Price");
+        List<Backpack.Thing> npcString = trade.npc.backpack.getThings();
+        for (Backpack.Thing thing : npcString) {
+            npcTable.getTableModel().addRow(thing.name, thing.amount + "", thing.recover + "", thing.price + "");
+        }
+        npcTable.setSelectAction(() -> {
+            int row = npcTable.getSelectedRow();
+            Backpack.Thing thing = npcString.get(row);
+            try {
+                trade.trade(thing);
+            } catch (GameException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Error")
+                        .setText(e.getMessage())
+                        .addButton(MessageDialogButton.OK)
+                        .build()
+                        .showDialog(gui);
+            }
+            gameToPanel(mainPanel, game);
+        });
+        rightPanel.addComponent(npcTable);
+        leftPanel.addComponent(new Button("Back", () -> {
+            try {
+                trade.interrupt();
+            } catch (GameException e) {
+                new MessageDialogBuilder()
+                        .setTitle("Error")
+                        .setText(e.getMessage())
+                        .addButton(MessageDialogButton.OK)
+                        .build()
+                        .showDialog(gui);
+            }
+            gameToPanel(mainPanel, game);
+        }));
+
     }
 
     static void fightToPanel(Panel mainPanel, Game game) {
+        Fight fight = (Fight) game.interaction;
 
     }
 
     static void saveToPanel(Panel mainPanel, Game game) {
+        mainPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
         SaveParser saveParser = (SaveParser) game.interaction;
         mainPanel.addComponent(new Label("Saving..."));
         String saveName = "path placeholder";

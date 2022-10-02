@@ -34,6 +34,17 @@ public class Trade extends Interaction {
         }
     }
 
+    void trade(Backpack.Thing t) throws GameException {
+        npc.sell(t);
+        player.buy(t);
+        if (player.money < 0) {
+            interrupt();
+        }
+        if (npc.getRemainingThingsSize() == 0) {
+            interrupt();
+        }
+    }
+
     /**
      * @throws GameException when player's money is less than 0 || npc's remaining things is 0 || manually interrupt
      */
