@@ -46,7 +46,7 @@ class FightTest {
     void levelUpTest1() throws GameException {
         fighterStat.setExp(15);
         fighterStat.levelUp();
-        assertEquals(1, fighterStat.getFighterLevel(), "incorrect level");
+        assertEquals(1, fighterStat.getLevel(), "incorrect level");
     }
 
     @Test
@@ -103,7 +103,7 @@ class FightTest {
     }
     @Test
     void level1CalcSkillAtkTest() {
-        fighterStat.fighterLevel = 1;
+        fighterStat.level = 1;
         Skill s = fighterStat.calcSkillATK(skill3);
         assertEquals(20, s.getAtk(), "incorrect atk calculation");
     }
