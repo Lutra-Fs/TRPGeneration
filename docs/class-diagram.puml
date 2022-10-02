@@ -1,0 +1,259 @@
+@startuml
+abstract class src.main.NPC {
+~ String name
+~ Location loc
+~ void interact(Player)
+~ void interrupt(Player)
+}
+class src.main.App {
+~ {static} BasicWindow window
+~ {static} MultiWindowTextGUI gui
+~ {static} Game game
+- {static} Screen screen
++ {static} void main(String[])
+~ {static} void gameToPanel(Panel,Game)
+~ {static} void levelToPanel(Panel,Game)
+~ {static} void talkToPanel(Panel,Game)
+~ {static} void tradeToPanel(Panel,Game)
+~ {static} void fightToPanel(Panel,Game)
+~ {static} void saveToPanel(Panel,Game)
+}
+class src.main.Talk {
+~ TalkNPC npc
+~ Sentence curSentence
+~ void nextSentence()
+~ void nextSentence(int)
+~ void interrupt()
+}
+abstract class src.main.Interaction {
+~ Player player
+~ {abstract}void interrupt()
+}
+class src.main.GameException {
+}
+class src.main.GameException.PlayerDeadException {
+}
+class src.main.Sentence {
+~ String sentence
+~ List<Sentence> nextSentences
+}
+class src.main.Location {
+~ {static} int maxX
+~ {static} int maxY
+~ int x
+~ int y
+~ {static} void setMax(int,int)
+~ Location getLeft()
+~ Location getRight()
+~ Location getUp()
+~ Location getDown()
+}
+class src.main.Skill {
+~ String name
+~ int atk
+~ int mp
++ String getName()
++ int getAtk()
++ void setAtk(int)
++ int getMp()
+}
+class src.main.Enemy {
+- EnemyState level
+~ FighterStat state
+~ void interact(Player)
+~ EnemyState getLevel()
+}
+enum src.main.EnemyState {
++  NORMAL
++  ELITE
++  BOSS
+~ {static} EnemyState getEnemyState(int)
+}
+class src.main.Player {
+~ String name
+~ PlayerState p
+~ Location curLoc
+~ int money
+~ FighterStat fightStat
+~ Backpack b
+~ void buy(Backpack.Thing)
+~ void use(Backpack.Thing,FighterStat)
+~ Backpack getBackpack()
+~ List<Backpack.Thing> getThings()
+}
+enum src.main.PlayerState {
++  NORMAL
++  FIGHTING
++  TRADING
++  TALKING
++  INTERACTING
++  SAVING
+}
+class src.main.Trade {
+~ Trader npc
+~ void trade(String)
+~ void interrupt()
+}
+class src.main.TalkNPC {
+~ Sentence firstSentence
+~ void interact(Player)
+}
+class src.main.Game {
+~ {static} Interaction interaction
+~ String gamePath
+~ Player player
+~ Level level
+~ Interaction getInteraction()
+~ {static} void setInteraction(Interaction)
+}
+class src.main.Trader {
+~ Backpack backpack
+~ void interact(Player)
+~ List<Backpack.Thing> getCurrentThings()
+~ Backpack.Thing sell(String)
+~ int getRemainingThingsSize()
+}
+class src.main.Backpack {
+~ List<Thing> things
+~ Thing sell(int)
+~ List<Thing> getThings()
+~ Thing sell(String)
+~ void add(Thing)
+~ void add(String,int,int)
+~ Thing getThing(String)
+~ void use(Thing,FighterStat)
++ String toString()
++ boolean equals(Object)
++ int hashCode()
+}
+class src.main.Backpack.Thing {
+~ String name
+~ int price
+~ int recover
+~ int amount
+~ void use(FighterStat)
++ String getName()
++ String toString()
++ boolean equals(Object)
++ int hashCode()
+}
+class src.main.Fight {
+~ Enemy npc
+~ FighterStat playerStat
+~ FighterStat enemyStat
+~ boolean isPlayerTurn
++ List<Skill> getPlayerSkills()
++ List<Backpack.Thing> getPlayerBackpack()
++ void useThing(String)
++ void useSkill()
++ void useSkill(String)
++ boolean isEnd()
+~ void interrupt()
+}
+class src.main.SaveParser {
+~ {static} void createSaveFile(Game)
+~ {static} Player loadPlayer(String)
+~ {static} Level loadLevel(String)
+~ {static} void loadSave(String,Player,Level)
+~ {static} Game loadGame(String)
+~ {static} void loadNextLevel(Level)
+~ void interrupt()
+}
+class src.main.NPCAdapter {
+- {static} String CLASS_TYPE
++ Object deserialize(JsonElement,Type,JsonDeserializationContext)
++ JsonElement serialize(Object,Type,JsonSerializationContext)
+}
+class src.main.FighterStat {
+~ int expPerLevel
+~ int hp
+~ int mp
+~ int atk
+~ int def
+~ int level
+~ int exp
+~ int maxHP
+~ int maxMP
+~ List<Skill> skills
+~ List<Skill> getSkills()
+~ void resetHP()
+~ void resetMP()
+~ int getHp()
+~ void setHp(int)
+~ int getMp()
+~ void setMp(int)
+~ int getMaxHP()
+~ int getMaxMP()
+~ int getLevel()
+~ int getDef()
+~ int getExp()
+~ void setExp(int)
+~ Skill getSkill(int)
+~ Skill getSkillAI()
+~ int getExpPerLevel()
+~ void addHP(int)
+~ void addMP(int)
+~ Skill calcSkillATK(Skill)
+~ void levelUp()
+~ void beAttacked(Skill)
+~ boolean isDead()
+~ Skill getSkillByName(String)
+}
+class src.main.Level {
+~ {static} String gamePath
+~ int curLevel
+~ Location startLoc
+~ Location endLoc
+~ boolean[][] coordinates
+~ Map<Location,NPC> npcs
+~ Set<Location> npcLocation
+~ int maxX
+~ int maxY
+~ {static} void setGamePath(String)
+~ boolean isInteractable(Location)
+~ NPC getNPC(Location)
+~ boolean isWall(Location)
+~ void levelUp(Player)
+~ String[][] getSurronding(Location)
+}
+class src.main.Saver {
++ void interact(Player)
+}
+
+
+src.main.Interaction <|-- src.main.Talk
+src.main.Exception <|-- src.main.GameException
+src.main.GameException +.. src.main.GameException.PlayerDeadException
+src.main.GameException <|-- src.main.GameException.PlayerDeadException
+src.main.NPC <|-- src.main.Enemy
+src.main.Interaction <|-- src.main.Trade
+src.main.NPC <|-- src.main.TalkNPC
+src.main.NPC <|-- src.main.Trader
+src.main.Backpack +.. src.main.Backpack.Thing
+src.main.Interaction <|-- src.main.Fight
+src.main.Interaction <|-- src.main.SaveParser
+src.main.JsonSerializer <|.. src.main.NPCAdapter
+src.main.JsonDeserializer <|.. src.main.NPCAdapter
+src.main.NPC <|-- src.main.Saver
+
+src.main.Game *-- src.main.Player
+src.main.Game *-- src.main.Level
+src.main.Game *-- src.main.Interaction
+src.main.Player *-- src.main.FighterStat
+src.main.Player *-- src.main.Backpack
+src.main.Player *-- src.main.Location
+src.main.Player *-- src.main.PlayerState
+src.main.Level *-- src.main.Location
+src.main.Level *-- src.main.NPC
+src.main.Interaction *-- src.main.Player
+src.main.FighterStat *-- src.main.Skill
+src.main.TalkNPC *-- src.main.Sentence
+src.main.Trader *-- src.main.Backpack
+src.main.App *-- src.main.Game
+src.main.Enemy +-- src.main.EnemyState
+src.main.Fight *-- src.main.FighterStat
+src.main.Fight *-- src.main.Enemy
+src.main.Trade *-- src.main.Trader
+src.main.Talk *-- src.main.TalkNPC
+
+@enduml
