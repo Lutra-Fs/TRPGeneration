@@ -379,7 +379,7 @@ public class App {
         table.getTableModel().addRow(talk.curSentence.sentence);
 
         ActionListBox actionListBox = new ActionListBox();
-        mainPanel.addComponent(actionListBox, GridLayout.createLayoutData(GridLayout.Alignment.END GridLayout.Alignment.BEGINNING, true, false, 1, 1));
+        mainPanel.addComponent(actionListBox, GridLayout.createLayoutData(GridLayout.Alignment.END, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
         for (Sentence sentence : talk.curSentence.nextSentences) {
             actionListBox.addItem(sentence.sentence, () -> {
                 table.getTableModel().addRow(sentence.sentence);
