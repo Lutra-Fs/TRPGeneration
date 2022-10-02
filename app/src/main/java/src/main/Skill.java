@@ -1,6 +1,8 @@
 package src.main;
 
 /**
+ * skill of the player and the NPC
+ *
  * @author Bo ZHANG
  */
 public class Skill {
