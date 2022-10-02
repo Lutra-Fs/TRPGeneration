@@ -27,7 +27,7 @@ public class Fight extends Interaction {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public Fight(Player player, Enemy npc) {
+    Fight(Player player, Enemy npc) {
         super(player);
         this.npc = npc;
         this.playerStat = player.fightStat;
@@ -41,7 +41,7 @@ public class Fight extends Interaction {
      * @return player skills
      * @author Juhao Tao
      */
-    public List<Skill> getPlayerSkills() {
+    List<Skill> getPlayerSkills() {
         return playerStat.getSkills();
     }
 
@@ -51,7 +51,7 @@ public class Fight extends Interaction {
      * @return player backpack
      * @author Bo ZHANG
      */
-    public List<Backpack.Thing> getPlayerBackpack() {
+    List<Backpack.Thing> getPlayerBackpack() {
         return player.getThings();
     }
 
@@ -64,7 +64,7 @@ public class Fight extends Interaction {
      * @author Juhao Tao
      * @see Backpack
      */
-    public void useThing(String name) throws GameException {
+    void useThing(String name) throws GameException {
         Backpack.Thing t;
         // Check if Thing is valid to use
         if (name.matches("\\d+")) {
@@ -94,7 +94,7 @@ public class Fight extends Interaction {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public void useSkill() throws GameException {
+    void useSkill() throws GameException {
         // Check if Skill is valid to use
         FighterStat s = isPlayerTurn ? playerStat : enemyStat;
         Skill sAi = s.calcSkillATK(s.getSkillAI());
@@ -120,7 +120,7 @@ public class Fight extends Interaction {
      * @see FighterStat
      * @see Skill
      */
-    public void useSkill(String name) throws GameException {
+    void useSkill(String name) throws GameException {
         // Check if Skill is valid to use
         Skill s;
         if (name.matches("\\d+")) {
@@ -166,7 +166,7 @@ public class Fight extends Interaction {
      * @return true if fight is end (player or npc is dead)
      * @author Juhao Tao
      */
-    public boolean isEnd() {
+    boolean isEnd() {
         return playerStat.isDead() || enemyStat.isDead();
     }
 

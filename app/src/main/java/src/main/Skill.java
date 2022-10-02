@@ -19,7 +19,7 @@ public class Skill {
      * @param mp   skill attack cost energy
      * @author Juhao Tao
      */
-    public Skill(String name, int atk, int mp) {
+    Skill(String name, int atk, int mp) {
         this.name = name;
         this.atk = atk;
         this.mp = mp;
@@ -31,7 +31,7 @@ public class Skill {
      * @return skill name
      * @author Juhao Tao
      */
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -41,7 +41,7 @@ public class Skill {
      * @return skill damage
      * @author Juhao Tao
      */
-    public int getAtk() {
+    int getAtk() {
         return atk;
     }
 
@@ -51,7 +51,7 @@ public class Skill {
      * @param atk set Skill attack with new damage
      * @author Juhao Tao
      */
-    public void setAtk(int atk) {
+    void setAtk(int atk) {
         this.atk = atk;
     }
 
@@ -61,7 +61,7 @@ public class Skill {
      * @return MP
      * @author Juhao Tao
      */
-    public int getMp() {
+    int getMp() {
         return mp;
     }
 

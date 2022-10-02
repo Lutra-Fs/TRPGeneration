@@ -19,7 +19,7 @@ public class Saver extends NPC {
     }
 
     @Override
-    public void interact(Player p) {
+    void interact(Player p) {
         p.p = Player.PlayerState.SAVING;
     }
 }

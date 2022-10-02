@@ -22,7 +22,7 @@ public class Enemy extends NPC {
      * @author Juhao Tao
      * @author Bo ZHANG
      */
-    public Enemy(String name, int x, int y, int level, FighterStat state) {
+    Enemy(String name, int x, int y, int level, FighterStat state) {
         super(name, x, y);
         this.level = EnemyState.getEnemyState(level);
         this.state = state;

@@ -351,11 +351,11 @@ public class FighterStat {
         throw new GameException();
     }
 
-    public int getAttack() {
+    int getAttack() {
         return atk;
     }
 
-    public int getDefense() {
+    int getDefense() {
         return def;
     }
 

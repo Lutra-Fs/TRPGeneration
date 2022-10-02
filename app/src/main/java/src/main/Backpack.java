@@ -220,7 +220,7 @@ public class Backpack {
          * @return name
          * @author Bo ZHANG
          */
-        public String getName() {
+        String getName() {
             return name;
         }
 

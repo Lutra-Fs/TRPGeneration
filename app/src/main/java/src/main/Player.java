@@ -75,7 +75,7 @@ public class Player {
         return b.getThings();
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 

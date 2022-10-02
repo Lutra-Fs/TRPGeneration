@@ -36,7 +36,7 @@ public class Level {
      * @author Bo ZHANG
      * @author Jingqi Dou
      */
-    public Level(int curLevel, int maxX, int maxY, boolean[][] coordinates, Map<Location, NPC> npcs, Set<Location> npcLocation, Location startLoc, Location endLoc) {
+    Level(int curLevel, int maxX, int maxY, boolean[][] coordinates, Map<Location, NPC> npcs, Set<Location> npcLocation, Location startLoc, Location endLoc) {
         this.curLevel = curLevel;
         this.coordinates = coordinates;
         this.npcs = npcs;
