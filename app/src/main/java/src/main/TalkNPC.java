@@ -23,6 +23,12 @@ public class TalkNPC extends NPC {
         this.firstSentence = firstSentence;
     }
 
+    TalkNPC(String name, Sentence firstSentence) {
+        Location.setMax(1, 1);
+        super(name, 0, 0);
+        this.firstSentence = firstSentence;
+    }
+
     @Override
     void interact(Player p) {
         p.p = Player.PlayerState.TALKING;
