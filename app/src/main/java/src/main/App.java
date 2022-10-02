@@ -165,8 +165,24 @@ public class App {
             case TRADING -> tradeToPanel(mainPanel, game);
             case TALKING -> talkToPanel(mainPanel, game);
             case SAVING -> saveToPanel(mainPanel, game);
+            case INTERACTING -> interactToPanel(mainPanel, game);
         }
         window.setComponent(mainPanel);
+    }
+
+    private static void interactToPanel(Panel mainPanel, Game game) {
+        String interactText = """
+                You are not supposed to see this.
+                If you see this, please contact the developer.
+                Please also tell the developer what you did to get here.
+                We are sorry for the inconvenience.
+                """;
+        new MessageDialogBuilder()
+                .setTitle("Interacting Error")
+                .setText("You can't interact with this object.")
+                .addButton(MessageDialogButton.Close)
+                .build()
+                .showDialog(gui);
     }
 
     static void levelToPanel(Panel mainPanel, Game game) {
@@ -387,7 +403,7 @@ public class App {
     }
 
     static void tradeToPanel(Panel mainPanel, Game game) {
-
+        
     }
 
     static void fightToPanel(Panel mainPanel, Game game) {
