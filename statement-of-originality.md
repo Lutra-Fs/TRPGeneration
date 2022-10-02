@@ -13,10 +13,8 @@ your* group names and uids here (delete and add entries as necessary). By signin
 
 member_declaration:
 -
-
-    name: Bo ZHANG
-    uid: u7275896
-
+name: Bo ZHANG
+uid: u7275896
 -
 name: Jingqi DOU
 uid: u7381573
@@ -36,3 +34,5 @@ uid: u7269754
 # References
 
 - [1] Example Author. 2022. p5.js example code video. Retrieved from https://example.com/video
+- [2] Lanterna Java Livrary. Use for implement GUI. Retrieved from https://github.com/mabe02/lanterna
+- [3] JSON. Use JSON to create, store and load game saving file. Retrieved from https://www.json.org/json-en.html
