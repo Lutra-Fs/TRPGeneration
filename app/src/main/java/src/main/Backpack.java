@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Backpack class is used to list action of a player or NPC
+ * used to list action of a player or NPC
  *
  * @author Bo ZHANG
  */
@@ -100,6 +100,15 @@ public class Backpack {
         }
     }
 
+    /**
+     * add a thing to backpack
+     *
+     * @param name thing's name to add
+     * @param price of thing to add
+     * @param recover the recover effect of this thing
+     * @throws GameException when n is negative
+     * @author Bo ZHANG
+     */
     void add(String name, int price, int recover) {
         things.add(new Thing(name, price, recover));
     }
