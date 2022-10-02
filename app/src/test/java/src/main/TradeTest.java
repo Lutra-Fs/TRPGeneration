@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TradeTest {
+class TradeTest {
 
-    Player player1=new Player();
-    Player player2=new Player();
-    Player player3=new Player();
+    Player player1 = new Player();
+    Player player2 = new Player();
+    Player player3 = new Player();
 
 
-    Trader trader1=new Trader("trader1");
-    Trader trader2=new Trader("trader2");
-    Trader trader3=new Trader("trader3");
+    Trader trader1 = new Trader("trader1");
+    Trader trader2 = new Trader("trader2");
+    Trader trader3 = new Trader("trader3");
 
     Trade trade1 = new Trade(player1, trader1);
     Trade trade2 = new Trade(player2, trader2);
@@ -29,12 +29,12 @@ public class TradeTest {
         trader1.backpack.add("thing5", 30, 18);
 
         assertTrue(player1.b.getThings().isEmpty());
-        assertEquals(player1.money, 100);
+        assertEquals(100, player1.money);
         trade1.trade("thing");
 
-        assertEquals(player1.money, 90);
-        assertEquals(player1.b.getThings().size(), 1);
-        assertEquals(player1.b.getThings().get(0).name, "thing");
+        assertEquals(90, player1.money);
+        assertEquals(1, player1.b.getThings().size());
+        assertEquals("thing", player1.b.getThings().get(0).name);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class TradeTest {
         trader1.backpack.add("thing", 101, 10);
 
         assertTrue(player2.b.getThings().isEmpty());
-        assertEquals(player2.money, 100);
+        assertEquals(100, player2.money);
         assertThrows(GameException.class, () -> trade2.trade("thing"));
     }
 
@@ -51,7 +51,7 @@ public class TradeTest {
         trader1.backpack.add("thing", 10, 10);
 
         assertTrue(player3.b.getThings().isEmpty());
-        assertEquals(player3.money, 100);
+        assertEquals(100, player3.money);
         assertThrows(GameException.class, () -> trade3.trade("thing2"));
     }
 
@@ -60,7 +60,7 @@ public class TradeTest {
         trader3.backpack.add("thing", 10, 10);
 
         assertTrue(player3.b.getThings().isEmpty());
-        assertEquals(player3.money, 100);
+        assertEquals(100, player3.money);
         assertThrows(GameException.class, () -> trade3.trade("thing"));
     }
 }
