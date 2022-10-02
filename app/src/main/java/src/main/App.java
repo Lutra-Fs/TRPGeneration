@@ -297,13 +297,13 @@ public class App {
                 NPC npc = game.level.getNPC(game.player.curLoc);
                 npc.interact(game.player);
                 if (npc instanceof Trader curNPC) {
-                    game.setInteraction(new Trade(game.player, curNPC));
+                    Game.setInteraction(new Trade(game.player, curNPC));
                 } else if (npc instanceof TalkNPC curNPC) {
-                    game.setInteraction(new Talk(game.player, curNPC));
+                    Game.setInteraction(new Talk(game.player, curNPC));
                 } else if (npc instanceof Enemy curNPC) {
-                    game.setInteraction(new Fight(game.player, curNPC));
+                    Game.setInteraction(new Fight(game.player, curNPC));
                 } else if (npc instanceof Saver) {
-                    game.setInteraction(new SaveParser(game.player));
+                    Game.setInteraction(new SaveParser(game.player));
                 }
                 // Update the panel
                 gameToPanel(mainPanel, game);
@@ -383,7 +383,7 @@ public class App {
      */
     static void talkToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new GridLayout(2));
-        Talk talk = (Talk) game.interaction;
+        Talk talk = (Talk) Game.interaction;
         // check if the panel is not talk panel
         Table<String> table;
         if (mainPanel.getChildrenList().isEmpty()) {
@@ -445,7 +445,7 @@ public class App {
      * @param game
      */
     static void tradeToPanel(Panel mainPanel, Game game) {
-        Trade trade = (Trade) game.interaction;
+        Trade trade = (Trade) Game.interaction;
         Panel leftPanel = new Panel();
         Panel rightPanel = new Panel();
         mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Player's Backpack")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
@@ -502,7 +502,7 @@ public class App {
      * @author Bo ZHANG
      */
     static void fightToPanel(Panel mainPanel, Game game) {
-        Fight fight = (Fight) game.interaction;
+        Fight fight = (Fight) Game.interaction;
         mainPanel.setLayoutManager(new GridLayout(3));
         Panel leftPanel = new Panel();
         mainPanel.addComponent(leftPanel.withBorder(Borders.singleLine("Player's status")), GridLayout.createLayoutData(GridLayout.Alignment.BEGINNING, GridLayout.Alignment.BEGINNING, true, false, 1, 1));
@@ -601,7 +601,7 @@ public class App {
      */
     static void saveToPanel(Panel mainPanel, Game game) {
         mainPanel.setLayoutManager(new LinearLayout(Direction.VERTICAL));
-        SaveParser saveParser = (SaveParser) game.interaction;
+        SaveParser saveParser = (SaveParser) Game.interaction;
         mainPanel.addComponent(new Label("Saving..."));
         String saveName = "path placeholder";
         try {

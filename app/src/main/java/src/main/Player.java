@@ -16,6 +16,18 @@ public class Player {
     Backpack b;
 
     /**
+     * initialize player
+     */
+    Player() {
+        name = "Player";
+        Location.setMax(1, 1);
+        curLoc = new Location(0, 0);
+        money = 100;
+        fightStat = new FighterStat();
+        b = new Backpack();
+    }
+
+    /**
      * buy a thing from the trader
      *
      * @param t the thing to buy
@@ -74,17 +86,5 @@ public class Player {
         TALKING,
         INTERACTING,
         SAVING
-    }
-
-    /**
-     * initialize player
-     */
-    Player() {
-        name = "Player";
-        Location.setMax(1,1);
-        curLoc = new Location(0, 0);
-        money = 100;
-        fightStat = new FighterStat();
-        b = new Backpack();
     }
 }

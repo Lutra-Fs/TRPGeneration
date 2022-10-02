@@ -1,10 +1,7 @@
 package src.main;
 
 /**
- *
- *
  * @author Bo ZHANG
- *
  */
 public class Skill {
     String name;

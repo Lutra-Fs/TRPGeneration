@@ -23,12 +23,14 @@ class TalkTest {
         npc = new TalkNPC("bug", sentence1);
         talk = new Talk(p, npc);
     }
+
     @Test
     void emptySentenceTest() {
-        assertEquals("hello",talk.curSentence.sentence,"Wrong sentence");
+        assertEquals("hello", talk.curSentence.sentence, "Wrong sentence");
     }
+
     @Test
-    void nextSentenceTest1(){
+    void nextSentenceTest1() {
         boolean thrown = false;
         try {
             talk.nextSentence(2);
@@ -39,7 +41,7 @@ class TalkTest {
     }
 
     @Test
-    void nextSentenceTest2(){
+    void nextSentenceTest2() {
         boolean thrown = false;
         try {
             talk.nextSentence("hi");

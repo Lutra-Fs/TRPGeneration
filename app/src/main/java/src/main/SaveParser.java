@@ -78,7 +78,7 @@ public class SaveParser extends Interaction {
             throw new IOException("Cannot create game file");
         }
         try (FileWriter writer = new FileWriter(gamePath)) {
-            writer.write(l.gamePath);
+            writer.write(Level.gamePath);
         }
         return path;
     }
