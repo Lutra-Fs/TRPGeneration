@@ -23,6 +23,10 @@ public abstract class NPC {
         loc = new Location(x, y);
     }
 
+    protected NPC (String name){
+        this.name = name;
+    }
+
     /**
      * let the player interact with the NPC.
      * The default implementation does nothing.

@@ -100,8 +100,8 @@ public class Backpack {
         }
     }
 
-    void add(String name, int price, int weight) {
-        things.add(new Thing(name, price, weight));
+    void add(String name, int price, int recover) {
+        things.add(new Thing(name, price, recover));
     }
 
     /**

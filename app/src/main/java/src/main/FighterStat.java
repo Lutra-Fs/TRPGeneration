@@ -1,5 +1,6 @@
 package src.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -329,5 +330,22 @@ public class FighterStat {
             }
         }
         throw new GameException();
+    }
+
+    /**
+     * initialize the fight statistic
+     */
+    FighterStat(){
+        this.level = 1;
+        this.maxHP = 100;
+        this.maxMP = 50;
+        this.atk = 10;
+        this.def = 5;
+        this.exp = 0;
+        this.expPerLevel = 100;
+        this.hp = maxHP;
+        this.mp = maxMP;
+        this.skills = new ArrayList<>();
+        this.skills.add(new Skill("Base Attack", 10,5));
     }
 }

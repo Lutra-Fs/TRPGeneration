@@ -3,7 +3,7 @@ package src.main;
 /**
  * provide a game state of the game
  *
- * @ author Bo ZHANG
+ * @author Bo ZHANG
  */
 public class Game {
     static Interaction interaction;

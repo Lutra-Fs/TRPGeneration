@@ -16,6 +16,15 @@ public class Trader extends NPC {
     }
 
     /**
+     * initialize a new backpack for the trader
+     * @param name
+     */
+    Trader(String name){
+        super(name);
+        backpack = new Backpack();
+    }
+
+    /**
      * calling this method will change the player's state to trading
      *
      * @param p the player

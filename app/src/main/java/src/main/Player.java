@@ -72,4 +72,15 @@ public class Player {
         SAVING
     }
 
+    /**
+     * initialize player
+     */
+    Player() {
+        name = "Player";
+        Location.setMax(1,1);
+        curLoc = new Location(0, 0);
+        money = 100;
+        fightStat = new FighterStat();
+        b = new Backpack();
+    }
 }
